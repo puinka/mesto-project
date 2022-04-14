@@ -13,7 +13,7 @@
         <img
           src="images/profile.jpg"
           alt="фотография пользователя"
-          class="avatar"
+          class="profile__avatar"
         />
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -71,7 +71,33 @@
         </article>
       </section>
     </main>
-    <footer class="footer"></footer>
-    <div class="edit-form hidden"></div>
+    <footer class="footer">
+      <p class="footer__copyright">© 2020 Mesto Russia</p>
+    </footer>
+    <div class="edit-form hidden">
+      <button class="edit-form__close-button"></button>
+      <form action="submit" method="post" class="edit-form__container">
+        <legend class="edit-form__title">Редактировать профиль</legend>
+        <fieldset class="edit-form__contact-info">
+          <label>
+            <input
+              type="text"
+              class="edit-form__name"
+              placeholder="Имя"
+              value="Жак-Ив Кусто"
+            />
+          </label>
+          <label>
+            <input
+              type="text"
+              class="edit-form__occupation"
+              placeholder="Род занятий"
+              value="Исследователь океана"
+            />
+          </label>
+          <button class="edit-form__submit-button" type="submit"></button>
+        </fieldset>
+      </form>
+    </div>
   </body>
 </html>
