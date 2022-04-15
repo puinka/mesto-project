@@ -8,3 +8,18 @@
 .element:last-child {
   margin-bottom: 0;
 }
+
+@media screen and (min-width: 1280px) {
+  .element {
+    max-width: 282px;
+    margin-right: 17px;
+  }
+
+  .element:nth-child(3n) {
+    margin-right: 0;
+  }
+
+  .element:last-child {
+    margin-bottom: 20px;
+  }
+}

@@ -1,0 +1,7 @@
+@media screen and (min-width: 1280px) {
+  .elements {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
