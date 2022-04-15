@@ -1,0 +1,7 @@
+.profile__name-wrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  left: 10px;
+}
