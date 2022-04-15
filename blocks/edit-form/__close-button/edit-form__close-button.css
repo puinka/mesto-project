@@ -12,3 +12,12 @@
   right: 0;
   top: -36px;
 }
+
+@media screen and (min-width: 1280px) {
+  .edit-form__close-button {
+    width: 32px;
+    height: 32px;
+    right: -40px;
+    top: -40px;
+  }
+}

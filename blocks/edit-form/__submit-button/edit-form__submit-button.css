@@ -12,3 +12,10 @@
   border: none;
   border-radius: 2px;
 }
+
+@media screen and (min-width: 1280px) {
+  .edit-form__submit-button {
+    font-size: 18px;
+    height: 50px;
+  }
+}
