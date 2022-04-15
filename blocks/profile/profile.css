@@ -2,3 +2,10 @@
   padding-top: 42px;
   text-align: center;
 }
+
+@media screen and (min-width: 1280px) {
+  .profile {
+    display: flex;
+    justify-content: space-between;
+  }
+}

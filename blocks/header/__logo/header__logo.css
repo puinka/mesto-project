@@ -4,3 +4,10 @@
   width: 104px;
   height: 24px;
 }
+
+@media screen and (min-width: 1280px) {
+  .header__logo {
+    width: 142px;
+    min-height: 33px;
+  }
+}

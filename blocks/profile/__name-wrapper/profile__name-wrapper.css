@@ -5,3 +5,9 @@
   position: relative;
   left: 10px;
 }
+
+@media screen and (min-width: 1280px) {
+  .profile__name-wrapper {
+    left: 0;
+  }
+}

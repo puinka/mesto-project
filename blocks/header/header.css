@@ -12,3 +12,15 @@
   background-color: #545454;
   position: absolute;
 }
+
+@media screen and (min-width: 1280px) {
+  .header {
+    padding: 45px 200px 41px;
+  }
+
+  .header::after {
+    left: 200px;
+    width: calc(100vw - 400px);
+    top: 119px;
+  }
+}
