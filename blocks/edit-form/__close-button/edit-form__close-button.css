@@ -1,0 +1,14 @@
+.edit-form__close-button {
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url(../../../images/icons/close-button.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 20px;
+  height: 20px;
+  border: none;
+  position: absolute;
+  right: 0;
+  top: -36px;
+}

@@ -90,15 +90,16 @@
     <footer class="footer">
       <p class="footer__copyright">© 2020 Mesto Russia</p>
     </footer>
-    <div class="edit-form hidden">
-      <button class="edit-form__close-button"></button>
+
+    <div class="edit-form">
       <form action="submit" method="post" class="edit-form__container">
-        <legend class="edit-form__title">Редактировать профиль</legend>
+        <button class="edit-form__close-button"></button>
         <fieldset class="edit-form__contact-info">
+          <legend class="edit-form__title">Редактировать профиль</legend>
           <label>
             <input
               type="text"
-              class="edit-form__name"
+              class="edit-form__text-input edit-form__text-input_type_name"
               placeholder="Имя"
               value="Жак-Ив Кусто"
               name="username"
@@ -107,13 +108,15 @@
           <label>
             <input
               type="text"
-              class="edit-form__occupation"
+              class="edit-form__text-input edit-form__text-input_type_occupation"
               placeholder="Род занятий"
               value="Исследователь океана"
               name="useroccupation"
             />
           </label>
-          <button class="edit-form__submit-button" type="submit"></button>
+          <button class="edit-form__submit-button" type="submit">
+            Сохранить
+          </button>
         </fieldset>
       </form>
     </div>
