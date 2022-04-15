@@ -36,3 +36,5 @@
 @import url(blocks/edit-form/__name/edit-form__name.css);
 @import url(blocks/edit-form/__occupation/edit-form__occupation.css);
 @import url(blocks/edit-form/__submit-button/edit-form__submit-button.css);
+
+@import url(blocks/hidden/hidden.css);

@@ -4,3 +4,7 @@
   overflow: hidden;
   margin-bottom: 20px;
 }
+
+.element:last-child {
+  margin-bottom: 0;
+}
