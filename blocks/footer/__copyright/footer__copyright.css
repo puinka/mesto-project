@@ -4,3 +4,7 @@
   font-weight: 400;
   color: #545454;
 }
+
+@media screen and (min-width: 1280px) {
+  font-size: 18px;
+}
