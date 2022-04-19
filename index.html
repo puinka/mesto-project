@@ -107,7 +107,12 @@
     </footer>
 
     <div class="edit-form__container edit-form__container_open">
-      <form action="submit" method="post" class="edit-form__popup">
+      <form
+        action="submit"
+        method="post"
+        class="edit-form__popup"
+        name="edit-profile"
+      >
         <button class="edit-form__close-button" type="button"></button>
         <fieldset class="edit-form__contact-info">
           <legend class="edit-form__title">Редактировать профиль</legend>
@@ -116,8 +121,7 @@
               type="text"
               class="edit-form__text-input edit-form__text-input_type_name"
               placeholder="Имя"
-              value="Жак-Ив Кусто"
-              name="username"
+              name="user-name"
             />
           </label>
           <label>
@@ -125,8 +129,7 @@
               type="text"
               class="edit-form__text-input edit-form__text-input_type_occupation"
               placeholder="Род занятий"
-              value="Исследователь океана"
-              name="useroccupation"
+              name="user-occupation"
             />
           </label>
         </fieldset>

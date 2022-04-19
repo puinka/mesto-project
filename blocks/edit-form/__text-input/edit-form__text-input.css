@@ -8,3 +8,10 @@
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
+
+@media screen and (min-width: 1280px) {
+  .edit-form__text-input {
+    margin-bottom: 24px;
+    padding: 8px 0;
+  }
+}
