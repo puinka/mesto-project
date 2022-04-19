@@ -9,3 +9,7 @@
 - HTML
 - CSS
 - BEM methodology
+
+### Демо
+
+[Опубликованная страница](https://puinka.github.io/mesto-project/index.html)
