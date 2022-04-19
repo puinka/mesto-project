@@ -8,7 +8,7 @@
   background-image: url(../../images/icons/add-button.svg);
   background-position: center;
   background-repeat: no-repeat;
-  margin: 36px 0;
+  margin: 26px 0 34px;
   box-sizing: border-box;
   transition: opacity 0.3s ease-in;
   cursor: pointer;
@@ -22,5 +22,6 @@
   .add-button {
     max-width: 150px;
     background-size: 22px 22px;
+    margin: 32px 0 0;
   }
 }

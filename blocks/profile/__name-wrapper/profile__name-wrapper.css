@@ -3,11 +3,13 @@
   align-items: flex-start;
   justify-content: center;
   position: relative;
-  left: 10px;
+  left: 12px;
+  max-width: calc(100vw - 20px);
 }
 
 @media screen and (min-width: 1280px) {
   .profile__name-wrapper {
     left: 0;
+    padding-top: 10px;
   }
 }
