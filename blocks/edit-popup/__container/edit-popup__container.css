@@ -1,4 +1,4 @@
-.edit-form__popup {
+.edit-popup__container {
   position: relative;
   width: 282px;
   box-sizing: border-box;
@@ -9,7 +9,7 @@
 }
 
 @media screen and (min-width: 1280px) {
-  .edit-form__popup {
+  .edit-popup__container {
     width: 430px;
     padding: 34px 36px 37px;
   }

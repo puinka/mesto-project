@@ -106,37 +106,39 @@
       <p class="footer__copyright">&#169; 2020 Mesto Russia</p>
     </footer>
 
-    <div class="edit-form__container edit-form__container_open">
-      <form
-        action="submit"
-        method="post"
-        class="edit-form__popup"
-        name="edit-profile"
-      >
-        <button class="edit-form__close-button" type="button"></button>
-        <fieldset class="edit-form__contact-info">
-          <legend class="edit-form__title">Редактировать профиль</legend>
-          <label>
-            <input
-              type="text"
-              class="edit-form__text-input edit-form__text-input_type_name"
-              placeholder="Имя"
-              name="user-name"
-            />
-          </label>
-          <label>
-            <input
-              type="text"
-              class="edit-form__text-input edit-form__text-input_type_occupation"
-              placeholder="Род занятий"
-              name="user-occupation"
-            />
-          </label>
-        </fieldset>
-        <button class="edit-form__submit-button" type="submit">
-          Сохранить
-        </button>
-      </form>
+    <div class="edit-popup edit-popup_open">
+      <div class="edit-popup__container">
+        <button class="edit-popup__close-button" type="button"></button>
+        <h3 class="edit-popup__title">Редактировать профиль</h3>
+        <form
+          action="submit"
+          method="post"
+          class="edit-popup__form"
+          name="edit-profile"
+        >
+          <fieldset class="edit-popup__contact-info">
+            <label>
+              <input
+                type="text"
+                class="edit-popup__text-input"
+                placeholder="Имя"
+                name="user-name"
+              />
+            </label>
+            <label>
+              <input
+                type="text"
+                class="edit-popup__text-input"
+                placeholder="Род занятий"
+                name="user-occupation"
+              />
+            </label>
+          </fieldset>
+          <button class="edit-popup__submit-button" type="submit">
+            Сохранить
+          </button>
+        </form>
+      </div>
     </div>
   </body>
 </html>

@@ -1,4 +1,4 @@
-.edit-form__submit-button {
+.edit-popup__submit-button {
   display: block;
   width: 100%;
   margin-top: 24px;
@@ -15,12 +15,12 @@
   cursor: pointer;
 }
 
-.edit-form__submit-button:hover {
+.edit-popup__submit-button:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
 @media screen and (min-width: 1280px) {
-  .edit-form__submit-button {
+  .edit-popup__submit-button {
     font-size: 18px;
     height: 50px;
   }
