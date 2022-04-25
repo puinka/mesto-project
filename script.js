@@ -11,21 +11,31 @@ const inputUserOccupation = popupEditProfile.querySelector(
   `.popup__text-input_type_user-occupation`
 );
 
+const popupAddPlace = document.querySelector(`.popup_type_add-place`);
+const buttonCloseAddPlace = popupAddPlace.querySelector(`.popup__close-button`);
+const formAddPlace = popupAddPlace.querySelector(`.popup__form_type_add-place`);
+
 const profile = document.querySelector(`.profile`);
 const profileUserName = profile.querySelector(`.profile__name`);
 const profileUserOccupation = profile.querySelector(`.profile__occupation`);
 const buttonEditProfile = profile.querySelector(`.profile__edit-button`);
+const buttonAddPlace = profile.querySelector(`.profile__add-button`);
 
 function fillEditProfileInputs() {
   inputUserName.value = profileUserName.textContent;
   inputUserOccupation.value = profileUserOccupation.textContent;
 }
 
-function formSubmitHandler(evt) {
+function editFormSubmitHandler(evt) {
   evt.preventDefault();
   profileUserName.textContent = inputUserName.value;
   profileUserOccupation.textContent = inputUserOccupation.value;
   popupEditProfile.classList.remove(`popup_open`);
+}
+
+function addFormSubmitHandler(evt) {
+  evt.preventDefault();
+  popupAddPlace.classList.remove(`popup_open`);
 }
 
 buttonCloseEditProfile.addEventListener(`click`, function () {
@@ -37,6 +47,16 @@ buttonEditProfile.addEventListener(`click`, function () {
   fillEditProfileInputs();
 });
 
-formEditProfile.addEventListener(`submit`, formSubmitHandler);
+formEditProfile.addEventListener(`submit`, editFormSubmitHandler);
 
 fillEditProfileInputs();
+
+buttonAddPlace.addEventListener(`click`, function () {
+  popupAddPlace.classList.add(`popup_open`);
+});
+
+buttonCloseAddPlace.addEventListener(`click`, function () {
+  popupAddPlace.classList.remove(`popup_open`);
+});
+
+formAddPlace.addEventListener(`submit`, addFormSubmitHandler);
