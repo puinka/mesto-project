@@ -106,21 +106,21 @@
       <p class="footer__copyright">&#169; 2020 Mesto Russia</p>
     </footer>
 
-    <div class="edit-popup edit-popup_open">
-      <div class="edit-popup__container">
-        <button class="edit-popup__close-button" type="button"></button>
-        <h3 class="edit-popup__title">Редактировать профиль</h3>
+    <div class="popup popup_type_edit-profile popup_open">
+      <div class="popup__container">
+        <button class="popup__close-button" type="button"></button>
+        <h3 class="popup__title">Редактировать профиль</h3>
         <form
           action="submit"
           method="post"
-          class="edit-popup__form"
+          class="popup__form"
           name="edit-profile"
         >
-          <fieldset class="edit-popup__contact-info">
+          <fieldset class="popup__contact-info">
             <label>
               <input
                 type="text"
-                class="edit-popup__text-input"
+                class="popup__text-input"
                 placeholder="Имя"
                 name="user-name"
               />
@@ -128,15 +128,13 @@
             <label>
               <input
                 type="text"
-                class="edit-popup__text-input"
+                class="popup__text-input"
                 placeholder="Род занятий"
                 name="user-occupation"
               />
             </label>
           </fieldset>
-          <button class="edit-popup__submit-button" type="submit">
-            Сохранить
-          </button>
+          <button class="popup__submit-button" type="submit">Сохранить</button>
         </form>
       </div>
     </div>
