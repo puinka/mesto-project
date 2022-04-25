@@ -1,22 +1,32 @@
-let popupEditProfile = document.querySelector(`.popup_type_edit-profile`);
-let buttonCloseEditProfile =
+const popupEditProfile = document.querySelector(`.popup_type_edit-profile`);
+const buttonCloseEditProfile =
   popupEditProfile.querySelector(`.popup__close-button`);
-let inputUserName = popupEditProfile.querySelector(
+const formEditProfile = popupEditProfile.querySelector(
+  `.popup__form_type_edit-profile`
+);
+const inputUserName = popupEditProfile.querySelector(
   `.popup__text-input_type_user-name`
 );
-let inputUserOccupation = popupEditProfile.querySelector(
+const inputUserOccupation = popupEditProfile.querySelector(
   `.popup__text-input_type_user-occupation`
 );
 
-let profile = document.querySelector(`.profile`);
-let profileUserName = profile.querySelector(`.profile__name`);
-let profileUserOccupation = profile.querySelector(`.profile__occupation`);
-let buttonEditProfile = profile.querySelector(`.profile__edit-button`);
+const profile = document.querySelector(`.profile`);
+const profileUserName = profile.querySelector(`.profile__name`);
+const profileUserOccupation = profile.querySelector(`.profile__occupation`);
+const buttonEditProfile = profile.querySelector(`.profile__edit-button`);
 
-let fillEditProfileInputs = function () {
+function fillEditProfileInputs() {
   inputUserName.value = profileUserName.textContent;
   inputUserOccupation.value = profileUserOccupation.textContent;
-};
+}
+
+function formSubmitHandler(evt) {
+  evt.preventDefault();
+  profileUserName.textContent = inputUserName.value;
+  profileUserOccupation.textContent = inputUserOccupation.value;
+  popupEditProfile.classList.remove(`popup_open`);
+}
 
 buttonCloseEditProfile.addEventListener(`click`, function () {
   popupEditProfile.classList.remove(`popup_open`);
@@ -26,5 +36,7 @@ buttonEditProfile.addEventListener(`click`, function () {
   popupEditProfile.classList.add(`popup_open`);
   fillEditProfileInputs();
 });
+
+formEditProfile.addEventListener(`submit`, formSubmitHandler);
 
 fillEditProfileInputs();
