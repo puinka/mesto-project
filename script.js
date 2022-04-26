@@ -14,6 +14,12 @@ const inputUserOccupation = popupEditProfile.querySelector(
 const popupAddPlace = document.querySelector(`.popup_type_add-place`);
 const buttonCloseAddPlace = popupAddPlace.querySelector(`.popup__close-button`);
 const formAddPlace = popupAddPlace.querySelector(`.popup__form_type_add-place`);
+const inputPlaceName = formAddPlace.querySelector(
+  `.popup__text-input_type_place-name`
+);
+const inputPlaceLink = formAddPlace.querySelector(
+  `.popup__text-input_type_place-link`
+);
 
 const profile = document.querySelector(`.profile`);
 const profileUserName = profile.querySelector(`.profile__name`);
@@ -50,6 +56,8 @@ const initialCards = [
   },
 ];
 
+// function declare
+
 function fillEditProfileInputs() {
   inputUserName.value = profileUserName.textContent;
   inputUserOccupation.value = profileUserOccupation.textContent;
@@ -65,31 +73,35 @@ function editFormSubmitHandler(evt) {
 function addFormSubmitHandler(evt) {
   evt.preventDefault();
   popupAddPlace.classList.remove(`popup_open`);
+  let place = { name: inputPlaceName.value, link: inputPlaceLink.value };
+  renderElement(place, `afterBegin`);
+  inputPlaceName.value = ``;
+  inputPlaceLink.value = ``;
 }
 
-function renderElement(placeName, placeLink, order) {
-  let title = placeName;
-  let imageLink = placeLink;
+function renderElement({ name, link }, order) {
   let elementHTML = `
   <article class="element">
         <img
-            src="${imageLink}"
-            alt="${title}"
+            src="${link}"
+            alt="${name}"
             class="element__image"
         />
         <div class="element__info">
-            <h3 class="element__title">${title}</h3>
+            <h3 class="element__title">${name}</h3>
             <button class="element__like-button" type="button"></button>
         </div>
     </article>`;
   elements.insertAdjacentHTML(order, elementHTML);
 }
 
-function renderElementsSection(arr, order) {
-  arr.forEach(function (item) {
-    renderElement(item.name, item.link, order);
+function renderElementsSection(arr, order = `beforeEnd`) {
+  arr.forEach(function ({ name, link }) {
+    renderElement({ name, link }, order);
   });
 }
+
+// event listeners
 
 buttonCloseEditProfile.addEventListener(`click`, function () {
   popupEditProfile.classList.remove(`popup_open`);
@@ -102,8 +114,6 @@ buttonEditProfile.addEventListener(`click`, function () {
 
 formEditProfile.addEventListener(`submit`, editFormSubmitHandler);
 
-fillEditProfileInputs();
-
 buttonAddPlace.addEventListener(`click`, function () {
   popupAddPlace.classList.add(`popup_open`);
 });
@@ -114,4 +124,8 @@ buttonCloseAddPlace.addEventListener(`click`, function () {
 
 formAddPlace.addEventListener(`submit`, addFormSubmitHandler);
 
-renderElementsSection(initialCards, `beforeEnd`);
+// call functions
+
+fillEditProfileInputs();
+
+renderElementsSection(initialCards);

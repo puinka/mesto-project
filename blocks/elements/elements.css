@@ -2,7 +2,7 @@
   .elements {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     max-width: 880px;
     margin: 0 auto;
   }
