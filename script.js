@@ -56,7 +56,7 @@ const initialCards = [
   },
 ];
 
-// function declare
+// functions declaration
 
 function fillEditProfileInputs() {
   inputUserName.value = profileUserName.textContent;
