@@ -2,5 +2,4 @@
   height: auto;
   visibility: visible;
   opacity: 1;
-  transition: visibility 0ms 0ms, opacity 600ms 0ms;
 }
