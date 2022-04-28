@@ -27,7 +27,7 @@ const profileUserOccupation = profile.querySelector(`.profile__occupation`);
 const buttonEditProfile = profile.querySelector(`.profile__edit-button`);
 const buttonAddPlace = profile.querySelector(`.profile__add-button`);
 
-const elements = document.querySelector(`.elements`);
+const elementsSection = document.querySelector(`.elements`);
 
 const initialCards = [
   {
@@ -79,25 +79,32 @@ function addFormSubmitHandler(evt) {
   inputPlaceLink.value = ``;
 }
 
-function renderElement({ name, link }, order) {
-  let elementHTML = `
-  <article class="element">
-        <img
-            src="${link}"
-            alt="${name}"
-            class="element__image"
-        />
-        <div class="element__info">
-            <h3 class="element__title">${name}</h3>
-            <button class="element__like-button" type="button"></button>
-        </div>
-    </article>`;
-  elements.insertAdjacentHTML(order, elementHTML);
+function generateCardElement({ name, link }) {
+  const cardElement = document.createElement(`article`);
+  cardElement.classList.add(`element`);
+
+  const cardImage = document.createElement(`img`);
+  cardImage.classList.add(`element__image`);
+  cardImage.setAttribute(`src`, link);
+  cardImage.setAttribute(`alt`, name);
+
+  const cardInfo = document.createElement(`div`);
+  cardInfo.classList.add(`element__info`);
+  const cardTitle = document.createElement(`h3`);
+  cardTitle.classList.add(`element__title`);
+  cardTitle.textContent = name;
+  const likeButton = document.createElement(`button`);
+  likeButton.classList.add(`element__like-button`);
+
+  cardInfo.append(cardTitle, likeButton);
+  cardElement.append(cardImage, cardInfo);
+  return cardElement;
 }
 
-function renderElementsSection(arr, order = `beforeEnd`) {
-  arr.forEach(function ({ name, link }) {
-    renderElement({ name, link }, order);
+function renderElementsSection(arr) {
+  arr.forEach(function (item) {
+    const card = generateCardElement(item);
+    elementsSection.append(card);
   });
 }
 
