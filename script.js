@@ -1,6 +1,5 @@
 const popupEditProfile = document.querySelector(`.popup_type_edit-profile`);
-const buttonCloseEditProfile =
-  popupEditProfile.querySelector(`.popup__close-button`);
+const buttonsClosePopup = document.querySelectorAll(`.popup__close-button`);
 const formEditProfile = popupEditProfile.querySelector(
   `.popup__form_type_edit-profile`
 );
@@ -12,7 +11,6 @@ const inputUserOccupation = popupEditProfile.querySelector(
 );
 
 const popupAddPlace = document.querySelector(`.popup_type_add-place`);
-const buttonCloseAddPlace = popupAddPlace.querySelector(`.popup__close-button`);
 const formAddPlace = popupAddPlace.querySelector(`.popup__form_type_add-place`);
 const inputPlaceName = formAddPlace.querySelector(
   `.popup__text-input_type_place-name`
@@ -124,8 +122,11 @@ function renderElementsSection(arr) {
 
 // event listeners
 
-buttonCloseEditProfile.addEventListener(`click`, function () {
-  popupEditProfile.classList.remove(`popup_open`);
+buttonsClosePopup.forEach(function (button) {
+  button.addEventListener(`click`, function () {
+    const popup = button.closest(`.popup`);
+    popup.classList.remove(`popup_open`);
+  });
 });
 
 buttonEditProfile.addEventListener(`click`, function () {
@@ -137,10 +138,6 @@ formEditProfile.addEventListener(`submit`, editFormSubmitHandler);
 
 buttonAddPlace.addEventListener(`click`, function () {
   popupAddPlace.classList.add(`popup_open`);
-});
-
-buttonCloseAddPlace.addEventListener(`click`, function () {
-  popupAddPlace.classList.remove(`popup_open`);
 });
 
 formAddPlace.addEventListener(`submit`, addFormSubmitHandler);
