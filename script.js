@@ -107,6 +107,11 @@ function generateCardElement({ name, link }) {
     card.remove();
   });
 
+  likeButton.addEventListener(`click`, function () {
+    const heart = this;
+    heart.classList.toggle(`element__like-button-active`);
+  });
+
   return cardElement;
 }
 
