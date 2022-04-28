@@ -76,6 +76,7 @@ function addFormSubmitHandler(evt) {
   elementsSection.prepend(card);
   inputPlaceName.value = ``;
   inputPlaceLink.value = ``;
+  updateCardsList();
 }
 
 function generateCardElement({ name, link }) {
@@ -110,6 +111,8 @@ function generateCardElement({ name, link }) {
     heart.classList.toggle(`element__like-button-active`);
   });
 
+  //cardImage.addEventListener(`click`, imageViewHandler);
+
   return cardElement;
 }
 
@@ -117,6 +120,28 @@ function renderElementsSection(arr) {
   arr.forEach(function (item) {
     const card = generateCardElement(item);
     elementsSection.append(card);
+  });
+  updateCardsList();
+}
+
+function imageViewHandler(name, link) {
+  const imagePopup = document.querySelector(`.popup_type_view-photo`);
+  const image = imagePopup.querySelector(`.popup__image`);
+  const caption = imagePopup.querySelector(`.popup__caption`);
+  image.setAttribute(`src`, link);
+  caption.textContent = name;
+  imagePopup.classList.add(`popup_open`);
+  console.log(`click`);
+}
+
+function updateCardsList() {
+  const allCards = elementsSection.querySelectorAll(`.element`);
+  allCards.forEach(function (card) {
+    const name = card.innerText;
+    const image = card.querySelector(`.element__image`);
+    const link = image.src;
+    console.log(link);
+    image.addEventListener(`click`, imageViewHandler);
   });
 }
 
