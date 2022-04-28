@@ -88,6 +88,8 @@ function generateCardElement({ name, link }) {
   cardImage.classList.add(`element__image`);
   cardImage.setAttribute(`src`, link);
   cardImage.setAttribute(`alt`, name);
+  const deleteButton = document.createElement(`button`);
+  deleteButton.classList.add(`element__delete-button`);
 
   const cardInfo = document.createElement(`div`);
   cardInfo.classList.add(`element__info`);
@@ -98,7 +100,7 @@ function generateCardElement({ name, link }) {
   likeButton.classList.add(`element__like-button`);
 
   cardInfo.append(cardTitle, likeButton);
-  cardElement.append(cardImage, cardInfo);
+  cardElement.append(cardImage, deleteButton, cardInfo);
   return cardElement;
 }
 
