@@ -74,7 +74,8 @@ function addFormSubmitHandler(evt) {
   evt.preventDefault();
   popupAddPlace.classList.remove(`popup_open`);
   let place = { name: inputPlaceName.value, link: inputPlaceLink.value };
-  renderElement(place, `afterBegin`);
+  const card = generateCardElement(place);
+  elementsSection.prepend(card);
   inputPlaceName.value = ``;
   inputPlaceLink.value = ``;
 }
