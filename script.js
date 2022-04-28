@@ -101,6 +101,12 @@ function generateCardElement({ name, link }) {
 
   cardInfo.append(cardTitle, likeButton);
   cardElement.append(cardImage, deleteButton, cardInfo);
+
+  deleteButton.addEventListener(`click`, function () {
+    const card = deleteButton.closest(`.element`);
+    card.remove();
+  });
+
   return cardElement;
 }
 
