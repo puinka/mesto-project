@@ -111,8 +111,6 @@ function generateCardElement({ name, link }) {
     heart.classList.toggle(`element__like-button-active`);
   });
 
-  //cardImage.addEventListener(`click`, imageViewHandler);
-
   return cardElement;
 }
 
@@ -124,24 +122,22 @@ function renderElementsSection(arr) {
   updateCardsList();
 }
 
-function imageViewHandler(name, link) {
-  const imagePopup = document.querySelector(`.popup_type_view-photo`);
-  const image = imagePopup.querySelector(`.popup__image`);
-  const caption = imagePopup.querySelector(`.popup__caption`);
-  image.setAttribute(`src`, link);
-  caption.textContent = name;
-  imagePopup.classList.add(`popup_open`);
-  console.log(`click`);
+function imageViewHandler(evt) {
+  evt.preventDefault();
+  const viewPhotoPopup = document.querySelector(`.popup_type_view-photo`);
+  const cardImage = evt.target;
+  const link = cardImage.src;
+  const popupCaption = viewPhotoPopup.querySelector(`.popup__caption`);
+  const popupImage = viewPhotoPopup.querySelector(`.popup__image`);
+  popupImage.setAttribute(`src`, link);
+  popupCaption.textContent = cardImage.alt;
+  viewPhotoPopup.classList.add(`popup_open`);
 }
 
 function updateCardsList() {
   const allCards = elementsSection.querySelectorAll(`.element`);
   allCards.forEach(function (card) {
-    const name = card.innerText;
     const image = card.querySelector(`.element__image`);
-    const link = image.src;
-    console.log(link);
-    //TODO
     image.addEventListener(`click`, imageViewHandler);
   });
 }
