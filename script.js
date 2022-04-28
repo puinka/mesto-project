@@ -141,6 +141,7 @@ function updateCardsList() {
     const image = card.querySelector(`.element__image`);
     const link = image.src;
     console.log(link);
+    //TODO
     image.addEventListener(`click`, imageViewHandler);
   });
 }
