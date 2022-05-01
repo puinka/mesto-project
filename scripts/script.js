@@ -1,5 +1,5 @@
 const popupEditProfile = document.querySelector(`.popup_type_edit-profile`);
-const buttonsClosePopup = document.querySelectorAll(`.popup__close-button`);
+const popupCloseButtons = document.querySelectorAll(`.popup__close-button`);
 const formEditProfile = popupEditProfile.querySelector(
   `.popup__form_type_edit-profile`
 );
@@ -61,21 +61,20 @@ function fillEditProfileInputs() {
   inputUserOccupation.value = profileUserOccupation.textContent;
 }
 
-function editFormSubmitHandler(evt) {
+function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileUserName.textContent = inputUserName.value;
   profileUserOccupation.textContent = inputUserOccupation.value;
   popupEditProfile.classList.remove(`popup_open`);
 }
 
-function addFormSubmitHandler(evt) {
+function handleAddFormSubmit(evt) {
   evt.preventDefault();
   popupAddPlace.classList.remove(`popup_open`);
-  let place = { name: inputPlaceName.value, link: inputPlaceLink.value };
+  const place = { name: inputPlaceName.value, link: inputPlaceLink.value };
   const card = generateCardElement(place);
   elementsSection.prepend(card);
-  inputPlaceName.value = ``;
-  inputPlaceLink.value = ``;
+  evt.target.reset();
   updateCardsList();
 }
 
@@ -106,9 +105,8 @@ function generateCardElement({ name, link }) {
     card.remove();
   });
 
-  likeButton.addEventListener(`click`, function () {
-    const heart = this;
-    heart.classList.toggle(`element__like-button-active`);
+  likeButton.addEventListener(`click`, function (evt) {
+    evt.target.classList.toggle(`element__like-button-active`);
   });
 
   return cardElement;
@@ -144,7 +142,7 @@ function updateCardsList() {
 
 // event listeners
 
-buttonsClosePopup.forEach(function (button) {
+popupCloseButtons.forEach(function (button) {
   button.addEventListener(`click`, function () {
     const popup = button.closest(`.popup`);
     popup.classList.remove(`popup_open`);
@@ -156,16 +154,14 @@ buttonEditProfile.addEventListener(`click`, function () {
   fillEditProfileInputs();
 });
 
-formEditProfile.addEventListener(`submit`, editFormSubmitHandler);
+formEditProfile.addEventListener(`submit`, handleProfileFormSubmit);
 
 buttonAddPlace.addEventListener(`click`, function () {
   popupAddPlace.classList.add(`popup_open`);
 });
 
-formAddPlace.addEventListener(`submit`, addFormSubmitHandler);
+formAddPlace.addEventListener(`submit`, handleAddFormSubmit);
 
 // call functions
-
-fillEditProfileInputs();
 
 renderElementsSection(initialCards);
