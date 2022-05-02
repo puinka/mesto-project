@@ -84,7 +84,7 @@ function handleAddFormSubmit(evt) {
   evt.preventDefault();
   closePopup(popupAddPlace);
   const place = { name: inputPlaceName.value, link: inputPlaceLink.value };
-  const card = createCard(place);
+  const card = generateCardElement(place);
   elementsSection.prepend(card);
   evt.target.reset();
 }
@@ -97,14 +97,9 @@ function generateCardElement({ name, link }) {
   cardElement.querySelector(`.element__image`).alt = name;
   cardElement.querySelector(`.element__title`).textContent = name;
 
-  return cardElement;
-}
-
-function createCard(item) {
-  const newCard = generateCardElement(item);
-  const deleteButton = newCard.querySelector(`.element__delete-button`);
-  const likeButton = newCard.querySelector(`.element__like-button`);
-  const cardPhoto = newCard.querySelector(`.element__image`);
+  const deleteButton = cardElement.querySelector(`.element__delete-button`);
+  const likeButton = cardElement.querySelector(`.element__like-button`);
+  const cardPhoto = cardElement.querySelector(`.element__image`);
 
   deleteButton.addEventListener(`click`, function () {
     deleteButton.closest(`.element`).remove();
@@ -116,12 +111,12 @@ function createCard(item) {
 
   cardPhoto.addEventListener(`click`, handleImageView);
 
-  return newCard;
+  return cardElement;
 }
 
 function renderElementsSection(arr) {
   arr.forEach(function (item) {
-    const card = createCard(item);
+    const card = generateCardElement(item);
     elementsSection.append(card);
   });
 }
