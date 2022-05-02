@@ -1,9 +1,15 @@
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 768px) {
   .elements {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    max-width: 880px;
+    max-width: 80vw;
     margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .elements {
+    max-width: 880px;
   }
 }
