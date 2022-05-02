@@ -54,6 +54,10 @@ const initialCards = [
   },
 ];
 
+const viewPhotoPopup = document.querySelector(`.popup_type_view-photo`);
+const popupCaption = viewPhotoPopup.querySelector(`.popup__caption`);
+const popupImage = viewPhotoPopup.querySelector(`.popup__image`);
+
 // functions declaration
 
 function openPopup(popup) {
@@ -124,11 +128,8 @@ function renderElementsSection(arr) {
 
 function handleImageView(evt) {
   evt.preventDefault();
-  const viewPhotoPopup = document.querySelector(`.popup_type_view-photo`);
   const cardImage = evt.target;
   const link = cardImage.src;
-  const popupCaption = viewPhotoPopup.querySelector(`.popup__caption`);
-  const popupImage = viewPhotoPopup.querySelector(`.popup__image`);
   popupImage.setAttribute(`src`, link);
   popupCaption.textContent = cardImage.alt;
   openPopup(viewPhotoPopup);
