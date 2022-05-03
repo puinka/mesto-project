@@ -9,6 +9,7 @@
 - HTML
 - CSS
 - BEM methodology
+- JavaScript
 
 ### Демо
 
