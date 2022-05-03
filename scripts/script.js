@@ -92,14 +92,13 @@ function handleAddFormSubmit(evt) {
 function generateCardElement({ name, link }) {
   const cardTemplate = document.querySelector(`#card-template`).content;
   const cardElement = cardTemplate.querySelector(`.element`).cloneNode(true);
-
-  cardElement.querySelector(`.element__image`).src = link;
-  cardElement.querySelector(`.element__image`).alt = name;
-  cardElement.querySelector(`.element__title`).textContent = name;
-
   const deleteButton = cardElement.querySelector(`.element__delete-button`);
   const likeButton = cardElement.querySelector(`.element__like-button`);
   const cardPhoto = cardElement.querySelector(`.element__image`);
+
+  cardPhoto.src = link;
+  cardPhoto.alt = name;
+  cardElement.querySelector(`.element__title`).textContent = name;
 
   deleteButton.addEventListener(`click`, function () {
     deleteButton.closest(`.element`).remove();
