@@ -109,7 +109,7 @@ function generateCardElement({ name, link }) {
     evt.target.classList.toggle(`element__like-button-active`);
   });
 
-  cardPhoto.addEventListener(`click`, handleImageView);
+  cardPhoto.addEventListener(`click`, () => handleImageView(name, link));
 
   return cardElement;
 }
@@ -121,12 +121,10 @@ function renderElementsSection(arr) {
   });
 }
 
-function handleImageView(evt) {
-  evt.preventDefault();
-  const cardImage = evt.target;
-  const link = cardImage.src;
+function handleImageView(name, link) {
   popupImage.setAttribute(`src`, link);
-  popupCaption.textContent = cardImage.alt;
+  popupImage.setAttribute(`alt`, name);
+  popupCaption.textContent = name;
   openPopup(viewPhotoPopup);
 }
 
