@@ -60,12 +60,21 @@ const popupImage = viewPhotoPopup.querySelector(`.popup__image`);
 
 // functions declaration
 
+function handleEscKey(evt) {
+  const currentPopup = document.querySelector(`.popup_open`);
+  if (evt.key === `Escape`) {
+    closePopup(currentPopup);
+  }
+}
+
 function openPopup(popup) {
   popup.classList.add(`popup_open`);
+  document.addEventListener(`keydown`, handleEscKey);
 }
 
 function closePopup(popup) {
   popup.classList.remove(`popup_open`);
+  document.removeEventListener(`keydown`, handleEscKey);
 }
 
 function fillEditProfileInputs() {
