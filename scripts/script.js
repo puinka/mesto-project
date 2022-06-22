@@ -67,14 +67,23 @@ function handleEscKey(evt) {
   }
 }
 
+function handlePopupMouseClick(evt) {
+  const currentPopup = document.querySelector(`.popup_open`);
+  if (evt.target.classList.contains(`popup_open`)) {
+    closePopup(currentPopup);
+  }
+}
+
 function openPopup(popup) {
   popup.classList.add(`popup_open`);
   document.addEventListener(`keydown`, handleEscKey);
+  popup.addEventListener(`click`, handlePopupMouseClick);
 }
 
 function closePopup(popup) {
   popup.classList.remove(`popup_open`);
   document.removeEventListener(`keydown`, handleEscKey);
+  popup.removeEventListener(`click`, handlePopupMouseClick);
 }
 
 function fillEditProfileInputs() {
