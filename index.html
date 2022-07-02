@@ -117,6 +117,31 @@
       </div>
     </div>
 
+    <div class="popup popup_type_edit-avatar">
+      <div class="popup__container">
+        <button class="popup__close-button" type="button"></button>
+        <h3 class="popup__title">Обновить аватар</h3>
+        <form
+          action="submit"
+          method="post"
+          class="popup__form popup__form_type_edit-avatar"
+          name="edit-avatar"
+        >
+          <fieldset class="popup__avatar-info">
+            <label>
+              <input
+                type="text"
+                class="popup__text-input popup__text-input_type_avatar-link"
+                placeholder="Ссылка на картинку"
+                name="avatar-link"
+              />
+            </label>
+          </fieldset>
+          <button class="popup__submit-button" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
+
     <template id="card-template">
       <article class="element">
         <img class="element__image">
