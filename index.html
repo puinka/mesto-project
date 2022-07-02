@@ -18,11 +18,13 @@
     <main class="content">
       <section class="profile">
         <div class="profile__user-wrapper">
-          <img
-            src="images/profile.jpg"
-            alt="фотография пользователя"
-            class="profile__avatar"
-          />
+          <button class="profile__avatar-edit-button" type="button">
+            <img
+              src="images/profile.jpg"
+              alt="фотография пользователя"
+              class="profile__avatar-image"
+            />
+          </button>
           <div class="profile__info">
             <div class="profile__name-wrapper">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -106,14 +108,14 @@
     </div>
 
     <div class="popup popup_type_view-photo">
-    <div class="popup__image-container">
+      <div class="popup__image-container">
         <button class="popup__close-button" type="button"></button>
         <img
           src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
           alt="Архыз"
           class="popup__image"
         />
-        <h4 class="popup__caption">Новое место</h3>
+        <h4 class="popup__caption">Новое место</h4>
       </div>
     </div>
 
@@ -144,7 +146,7 @@
 
     <template id="card-template">
       <article class="element">
-        <img class="element__image">
+        <img class="element__image" />
         <button class="element__delete-button"></button>
         <div class="element__info">
           <h3 class="element__title">Архыз</h3>
