@@ -182,6 +182,10 @@ buttonAddPlace.addEventListener(`click`, function () {
   openPopup(popupAddPlace);
 });
 
+buttonEditAvatar.addEventListener(`click`, function () {
+  openPopup(popupEditAvatar);
+});
+
 formAddPlace.addEventListener(`submit`, handleAddFormSubmit);
 
 // call functions
