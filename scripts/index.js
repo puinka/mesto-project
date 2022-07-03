@@ -19,7 +19,7 @@ const popupCloseButtons = document.querySelectorAll(`.popup__close-button`);
 //Edit Profile popup elements
 const popupEditProfile = document.querySelector(`.popup_type_edit-profile`);
 const formEditProfile = popupEditProfile.querySelector(
-  `.popup__form_type_edit-profile`
+  `.form_type_edit-profile`
 );
 const inputUserName = popupEditProfile.querySelector(
   `.popup__text-input_type_user-name`
@@ -30,7 +30,7 @@ const inputUserOccupation = popupEditProfile.querySelector(
 
 //Add place popup elements
 const popupAddPlace = document.querySelector(`.popup_type_add-place`);
-const formAddPlace = popupAddPlace.querySelector(`.popup__form_type_add-place`);
+const formAddPlace = popupAddPlace.querySelector(`.form_type_add-place`);
 const inputPlaceName = formAddPlace.querySelector(
   `.popup__text-input_type_place-name`
 );
@@ -40,9 +40,7 @@ const inputPlaceLink = formAddPlace.querySelector(
 
 //Edit avatar popup elements
 const popupEditAvatar = document.querySelector(`.popup_type_edit-avatar`);
-const formEditAvatar = popupEditAvatar.querySelector(
-  `.popup__form_type_edit-avatar`
-);
+const formEditAvatar = popupEditAvatar.querySelector(`.form_type_edit-avatar`);
 const inputAvatarLink = formEditAvatar.querySelector(
   `.popup__text-input_type_avatar-link`
 );
