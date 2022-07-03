@@ -5,7 +5,6 @@ import { openPopup, closePopup } from "./popup.js";
 const elementsSection = document.querySelector(`.elements`);
 
 //Profile elements
-
 const profile = document.querySelector(`.profile`);
 const profileUserName = profile.querySelector(`.profile__name`);
 const profileUserOccupation = profile.querySelector(`.profile__occupation`);
@@ -18,32 +17,20 @@ const popupCloseButtons = document.querySelectorAll(`.popup__close-button`);
 
 //Edit Profile popup elements
 const popupEditProfile = document.querySelector(`.popup_type_edit-profile`);
-const formEditProfile = popupEditProfile.querySelector(
-  `.form_type_edit-profile`
-);
-const inputUserName = popupEditProfile.querySelector(
-  `.form__text-input_type_user-name`
-);
-const inputUserOccupation = popupEditProfile.querySelector(
-  `.form__text-input_type_user-occupation`
-);
+const formEditProfile = document.forms.editProfile;
+const inputUserName = formEditProfile.elements.userName;
+const inputUserOccupation = formEditProfile.elements.userOccupation;
 
 //Add place popup elements
 const popupAddPlace = document.querySelector(`.popup_type_add-place`);
-const formAddPlace = popupAddPlace.querySelector(`.form_type_add-place`);
-const inputPlaceName = formAddPlace.querySelector(
-  `.form__text-input_type_place-name`
-);
-const inputPlaceLink = formAddPlace.querySelector(
-  `.form__text-input_type_place-link`
-);
+const formAddPlace = document.forms.addPlace;
+const inputPlaceName = formAddPlace.elements.placeName;
+const inputPlaceLink = formAddPlace.elements.placeLink;
 
 //Edit avatar popup elements
 const popupEditAvatar = document.querySelector(`.popup_type_edit-avatar`);
-const formEditAvatar = popupEditAvatar.querySelector(`.form_type_edit-avatar`);
-const inputAvatarLink = formEditAvatar.querySelector(
-  `.form__text-input_type_avatar-link`
-);
+const formEditAvatar = document.forms.editAvatar;
+const inputAvatarLink = formEditAvatar.elements.avatarLink;
 
 //functions
 function fillEditProfileInputs() {
