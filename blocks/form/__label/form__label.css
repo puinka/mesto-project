@@ -1,0 +1,10 @@
+.form__label {
+  display: block;
+  margin-bottom: 20px;
+}
+
+@media screen and (min-width: 1280px) {
+  .form__label {
+    margin-bottom: 28px;
+  }
+}
