@@ -1,4 +1,16 @@
-import { handleImageView } from "./popup.js";
+import { openPopup } from "./popup.js";
+
+//View photo popup elements
+const viewPhotoPopup = document.querySelector(`.popup_type_view-photo`);
+const popupCaption = viewPhotoPopup.querySelector(`.popup__caption`);
+const popupImage = viewPhotoPopup.querySelector(`.popup__image`);
+
+function handleImageView(name, link) {
+  popupImage.setAttribute(`src`, link);
+  popupImage.setAttribute(`alt`, name);
+  popupCaption.textContent = name;
+  openPopup(viewPhotoPopup);
+}
 
 export function generateCardElement({ name, link }) {
   const cardTemplate = document.querySelector(`#card-template`).content;
