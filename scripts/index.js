@@ -22,27 +22,27 @@ const formEditProfile = popupEditProfile.querySelector(
   `.form_type_edit-profile`
 );
 const inputUserName = popupEditProfile.querySelector(
-  `.popup__text-input_type_user-name`
+  `.form__text-input_type_user-name`
 );
 const inputUserOccupation = popupEditProfile.querySelector(
-  `.popup__text-input_type_user-occupation`
+  `.form__text-input_type_user-occupation`
 );
 
 //Add place popup elements
 const popupAddPlace = document.querySelector(`.popup_type_add-place`);
 const formAddPlace = popupAddPlace.querySelector(`.form_type_add-place`);
 const inputPlaceName = formAddPlace.querySelector(
-  `.popup__text-input_type_place-name`
+  `.form__text-input_type_place-name`
 );
 const inputPlaceLink = formAddPlace.querySelector(
-  `.popup__text-input_type_place-link`
+  `.form__text-input_type_place-link`
 );
 
 //Edit avatar popup elements
 const popupEditAvatar = document.querySelector(`.popup_type_edit-avatar`);
 const formEditAvatar = popupEditAvatar.querySelector(`.form_type_edit-avatar`);
 const inputAvatarLink = formEditAvatar.querySelector(
-  `.popup__text-input_type_avatar-link`
+  `.form__text-input_type_avatar-link`
 );
 
 //functions
