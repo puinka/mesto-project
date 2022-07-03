@@ -59,6 +59,9 @@
               placeholder="Имя"
               name="userName"
               id="user-name-input"
+              minlength="2"
+              maxlength="40"
+              required
             />
             <span class="user-name-input-error form__input-error"></span>
           </label>
@@ -69,6 +72,9 @@
               placeholder="Род занятий"
               name="userOccupation"
               id="user-occupation-input"
+              minlength="2"
+              maxlength="200"
+              required
             />
             <span class="user-occupation-input-error form__input-error"></span>
           </label>
@@ -96,6 +102,9 @@
               placeholder="Название"
               name="placeName"
               id="place-name"
+              minlength="2"
+              maxlength="30"
+              required
             />
             <span class="place-name-input-error form__input-error"></span>
           </label>
@@ -106,6 +115,7 @@
               placeholder="Ссылка на картинку"
               name="placeLink"
               id="place-link"
+              required
             />
             <span class="place-link-input-error form__input-error"></span>
           </label>
