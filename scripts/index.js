@@ -1,6 +1,7 @@
 import { initialCards } from "./data.js";
 import { generateCardElement } from "./cards.js";
 import { openPopup, closePopup } from "./popup.js";
+import { enableValidation } from "./validate.js";
 
 const elementsSection = document.querySelector(`.elements`);
 
@@ -91,3 +92,4 @@ function renderElementsSection(arr) {
 }
 
 renderElementsSection(initialCards);
+enableValidation();
