@@ -70,8 +70,6 @@ buttonEditAvatar.addEventListener(`click`, function () {
   openPopup(popupEditAvatar);
 });
 
-// Event listeners
-
 formEditProfile.addEventListener(`submit`, handleProfileFormSubmit);
 formAddPlace.addEventListener(`submit`, handleAddFormSubmit);
 
@@ -92,4 +90,6 @@ function renderElementsSection(arr) {
 }
 
 renderElementsSection(initialCards);
+
+//validation
 enableValidation();
