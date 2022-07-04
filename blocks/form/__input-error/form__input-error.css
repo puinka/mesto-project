@@ -4,5 +4,7 @@
   font-weight: 400;
   color: rgba(255, 0, 0, 1);
   display: block;
-  margin-top: 5px;
+  position: absolute;
+  top: 38px;
+  left: 0;
 }
