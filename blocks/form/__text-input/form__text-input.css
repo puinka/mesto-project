@@ -1,17 +1,20 @@
-.popup__text-input {
+.form__text-input {
   font-family: inherit;
   font-size: 14px;
   line-height: 1.2;
   padding: 10px 0;
   width: 100%;
-  margin-bottom: 20px;
+  background-color: transparent;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
+.form__text-input:focus-visible {
+  outline: none;
+}
+
 @media screen and (min-width: 1280px) {
-  .popup__text-input {
-    margin-bottom: 24px;
+  .form__text-input {
     padding: 8px 0;
   }
 }
