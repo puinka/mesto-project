@@ -1,3 +1,4 @@
+import "../css/pages/index.css";
 import { initialCards } from "./data.js";
 import { generateCardElement } from "./cards.js";
 import { openPopup, closePopup } from "./popup.js";

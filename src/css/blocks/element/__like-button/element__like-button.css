@@ -3,7 +3,7 @@
   border: none;
   width: 22px;
   height: 19px;
-  background-image: url(../../../images/icons/heart-default.svg);
+  background-image: url(../../../../assets/images/icons/heart-default.svg);
   background-position: center;
   background-repeat: no-repeat;
   transition: opacity 0.2s ease-in;
