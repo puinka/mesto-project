@@ -4,14 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="pages/index.css" />
     <title>Место</title>
   </head>
   <body class="page">
     <header class="header">
       <img
         class="header__logo"
-        src="images/logo.svg"
+        src="<%=require('./assets/images/logo.svg')%>"
         alt="Логотип проекта Место"
       />
     </header>
@@ -20,7 +19,7 @@
         <div class="profile__user-wrapper">
           <button class="profile__avatar-edit-button" type="button">
             <img
-              src="images/profile.jpg"
+              src="<%=require('./assets/images/profile.jpg')%>"
               alt="фотография пользователя"
               class="profile__avatar-image"
             />
@@ -128,11 +127,7 @@
     <div class="popup popup_type_view-photo">
       <div class="popup__image-container">
         <button class="popup__close-button" type="button"></button>
-        <img
-          src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
-          alt="Архыз"
-          class="popup__image"
-        />
+        <img src="" alt="Архыз" class="popup__image" />
         <h4 class="popup__caption">Новое место</h4>
       </div>
     </div>

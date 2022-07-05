@@ -1,7 +1,7 @@
 {
   "name": "mesto-project",
   "version": "1.0.0",
-  "description": "### Обзор",
+  "description": "Mesto Project",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/puinka/mesto-project.git"
   },
-  "author": "",
+  "author": "Valeria Nyman",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/puinka/mesto-project/issues"
