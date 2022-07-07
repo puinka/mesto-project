@@ -55,6 +55,7 @@ function handleAddFormSubmit(evt, config) {
   const card = generateCardElement(place);
   elementsSection.prepend(card);
   buttonElement.classList.add(config.buttonDisabledClass);
+  buttonElement.disabled = true;
   evt.target.reset();
 }
 
