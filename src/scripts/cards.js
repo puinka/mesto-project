@@ -1,3 +1,4 @@
+import { card } from "./data.js";
 import { openPopup } from "./popup.js";
 
 //View photo popup elements
@@ -12,6 +13,14 @@ function handleImageView(name, link) {
   openPopup(viewPhotoPopup);
 }
 
+function handleCardRemove(evt, item) {
+  evt.target.closest(item.cardClass).remove();
+}
+
+function toggleLike(evt, item) {
+  evt.target.classList.toggle(item.likeActiveClass);
+}
+
 export function generateCardElement({ name, link }) {
   const cardTemplate = document.querySelector(`#card-template`).content;
   const cardElement = cardTemplate.querySelector(`.element`).cloneNode(true);
@@ -23,13 +32,9 @@ export function generateCardElement({ name, link }) {
   cardPhoto.alt = name;
   cardElement.querySelector(`.element__title`).textContent = name;
 
-  deleteButton.addEventListener(`click`, function () {
-    deleteButton.closest(`.element`).remove();
-  });
+  deleteButton.addEventListener(`click`, (evt) => handleCardRemove(evt, card));
 
-  likeButton.addEventListener(`click`, function (evt) {
-    evt.target.classList.toggle(`element__like-button-active`);
-  });
+  likeButton.addEventListener(`click`, (evt) => toggleLike(evt, card));
 
   cardPhoto.addEventListener(`click`, () => handleImageView(name, link));
 

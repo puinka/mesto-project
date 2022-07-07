@@ -33,4 +33,9 @@ const config = {
   buttonDisabledClass: "form__submit-button_inactive",
 };
 
-export { initialCards, config };
+const card = {
+  cardClass: ".element",
+  likeActiveClass: "element__like-button-active",
+};
+
+export { initialCards, config, card };
