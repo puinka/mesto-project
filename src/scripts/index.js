@@ -1,5 +1,5 @@
 import "../css/pages/index.css";
-import { initialCards } from "./data.js";
+import { initialCards, config } from "./data.js";
 import { generateCardElement } from "./cards.js";
 import { openPopup, closePopup } from "./popup.js";
 import { enableValidation } from "./validate.js";
@@ -93,4 +93,4 @@ function renderElementsSection(arr) {
 renderElementsSection(initialCards);
 
 //validation
-enableValidation();
+enableValidation(config);
