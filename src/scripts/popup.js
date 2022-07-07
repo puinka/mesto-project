@@ -1,13 +1,13 @@
 function handleEscKey(evt) {
-  const currentPopup = document.querySelector(`.popup_open`);
   if (evt.key === `Escape`) {
+    const currentPopup = document.querySelector(`.popup_open`);
     closePopup(currentPopup);
   }
 }
 
 function handlePopupOverlayClick(evt) {
-  const currentPopup = document.querySelector(`.popup_open`);
   if (evt.target.classList.contains(`popup_open`)) {
+    const currentPopup = document.querySelector(`.popup_open`);
     closePopup(currentPopup);
   }
 }
@@ -15,13 +15,13 @@ function handlePopupOverlayClick(evt) {
 function openPopup(popup) {
   popup.classList.add(`popup_open`);
   document.addEventListener(`keydown`, handleEscKey);
-  popup.addEventListener(`click`, handlePopupOverlayClick);
+  popup.addEventListener(`mousedown`, handlePopupOverlayClick);
 }
 
 function closePopup(popup) {
   popup.classList.remove(`popup_open`);
   document.removeEventListener(`keydown`, handleEscKey);
-  popup.removeEventListener(`click`, handlePopupOverlayClick);
+  popup.removeEventListener(`mousedown`, handlePopupOverlayClick);
 }
 
 export { openPopup, closePopup };
