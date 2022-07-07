@@ -47,12 +47,14 @@ function handleProfileFormSubmit(evt) {
   closePopup(popupEditProfile);
 }
 
-function handleAddFormSubmit(evt) {
+function handleAddFormSubmit(evt, config) {
   evt.preventDefault();
+  const buttonElement = evt.target.elements.create;
   closePopup(popupAddPlace);
   const place = { name: inputPlaceName.value, link: inputPlaceLink.value };
   const card = generateCardElement(place);
   elementsSection.prepend(card);
+  buttonElement.classList.add(config.buttonDisabledClass);
   evt.target.reset();
 }
 
@@ -72,7 +74,9 @@ buttonEditAvatar.addEventListener(`click`, function () {
 });
 
 formEditProfile.addEventListener(`submit`, handleProfileFormSubmit);
-formAddPlace.addEventListener(`submit`, handleAddFormSubmit);
+formAddPlace.addEventListener(`submit`, (evt) =>
+  handleAddFormSubmit(evt, config)
+);
 
 popupCloseButtons.forEach(function (button) {
   button.addEventListener(`click`, function () {
