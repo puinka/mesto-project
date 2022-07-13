@@ -1,5 +1,6 @@
 import "../css/pages/index.css";
-import { initialCards, config } from "./data.js";
+import { initialCards } from "./data.js";
+import { classConfig } from "./config.js";
 import { generateCardElement } from "./cards.js";
 import { openPopup, closePopup } from "./popup.js";
 import { enableValidation } from "./validate.js";
@@ -76,7 +77,7 @@ buttonEditAvatar.addEventListener(`click`, function () {
 
 formEditProfile.addEventListener(`submit`, handleProfileFormSubmit);
 formAddPlace.addEventListener(`submit`, (evt) =>
-  handleAddFormSubmit(evt, config)
+  handleAddFormSubmit(evt, classConfig)
 );
 
 popupCloseButtons.forEach(function (button) {
@@ -98,4 +99,4 @@ function renderElementsSection(arr) {
 renderElementsSection(initialCards);
 
 //validation
-enableValidation(config);
+enableValidation(classConfig);

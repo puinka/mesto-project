@@ -25,17 +25,4 @@ const initialCards = [
   },
 ];
 
-const config = {
-  formClass: ".form",
-  textInputClass: ".form__text-input",
-  submitButtonClass: ".form__submit-button",
-  inputErrorClass: "form__text-input_type_error",
-  buttonDisabledClass: "form__submit-button_inactive",
-};
-
-const card = {
-  cardClass: ".element",
-  likeActiveClass: "element__like-button-active",
-};
-
-export { initialCards, config, card };
+export { initialCards };

@@ -1,4 +1,4 @@
-import { card } from "./data.js";
+import { classConfig } from "./config.js";
 import { openPopup } from "./popup.js";
 
 //View photo popup elements
@@ -32,9 +32,11 @@ export function generateCardElement({ name, link }) {
   cardPhoto.alt = name;
   cardElement.querySelector(`.element__title`).textContent = name;
 
-  deleteButton.addEventListener(`click`, (evt) => handleCardRemove(evt, card));
+  deleteButton.addEventListener(`click`, (evt) =>
+    handleCardRemove(evt, classConfig)
+  );
 
-  likeButton.addEventListener(`click`, (evt) => toggleLike(evt, card));
+  likeButton.addEventListener(`click`, (evt) => toggleLike(evt, classConfig));
 
   cardPhoto.addEventListener(`click`, () => handleImageView(name, link));
 
