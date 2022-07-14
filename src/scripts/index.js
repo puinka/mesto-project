@@ -50,27 +50,42 @@ function fillEditProfileInputs() {
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
+  const buttonElement = evt.target.elements.submit;
+  buttonElement.textContent = `Сохранение...`;
   patchProfile(inputUserName.value, inputUserOccupation.value)
     .then((user) => {
       profileUserName.textContent = user.name;
       profileUserOccupation.textContent = user.about;
       closePopup(popupEditProfile);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err))
+    .finally(() => {
+      buttonElement.textContent = `Сохранить`;
+    });
 }
 
 function handleAvatarFormSubmit(evt) {
   evt.preventDefault();
+  const buttonElement = evt.target.elements.submit;
+  buttonElement.textContent = `Сохранение...`;
   patchAvatar(inputAvatarLink.value)
     .then((user) => {
       profileAvatar.src = user.avatar;
       closePopup(popupEditAvatar);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err))
+    .finally(() => {
+      buttonElement.textContent = `Сохранить`;
+      buttonElement.classList.add(classConfig.buttonDisabledClass);
+      buttonElement.disabled = true;
+      evt.target.reset();
+    });
 }
 
-function handleAddFormSubmit(evt, config) {
+function handleAddFormSubmit(evt) {
   evt.preventDefault();
+  const buttonElement = evt.target.elements.create;
+  buttonElement.textContent = `Сохранение...`;
   const place = { name: inputPlaceName.value, link: inputPlaceLink.value };
   postCard(place)
     .then((item) => {
@@ -78,12 +93,13 @@ function handleAddFormSubmit(evt, config) {
       elementsSection.prepend(card);
       closePopup(popupAddPlace);
     })
-    .catch((err) => console.log(err));
-
-  const buttonElement = evt.target.elements.create;
-  buttonElement.classList.add(config.buttonDisabledClass);
-  buttonElement.disabled = true;
-  evt.target.reset();
+    .catch((err) => console.log(err))
+    .finally(() => {
+      buttonElement.textContent = `Создать`;
+      buttonElement.classList.add(classConfig.buttonDisabledClass);
+      buttonElement.disabled = true;
+      evt.target.reset();
+    });
 }
 
 // event listeners
