@@ -1,3 +1,4 @@
+import { deleteCard } from "./api.js";
 import { apiConfig, classConfig } from "./config.js";
 import { openPopup } from "./popup.js";
 
@@ -13,8 +14,9 @@ function handleImageView(name, link) {
   openPopup(viewPhotoPopup);
 }
 
-function handleCardRemove(evt, item) {
-  evt.target.closest(item.cardClass).remove();
+function handleCardRemove(evt, cardId) {
+  evt.target.closest(classConfig.cardClass).remove();
+  deleteCard(cardId);
 }
 
 function toggleLike(evt, item) {
@@ -25,7 +27,7 @@ function handleLikeClick(evt) {
   console.log("Click like!");
 }
 
-function generateCardElement({ name, link, owner, likes }) {
+function generateCardElement({ name, link, owner, likes, _id }) {
   const cardTemplate = document.querySelector(`#card-template`).content;
   const cardElement = cardTemplate
     .querySelector(classConfig.cardClass)
@@ -44,9 +46,7 @@ function generateCardElement({ name, link, owner, likes }) {
     deleteButton.remove();
   }
 
-  deleteButton.addEventListener(`click`, (evt) =>
-    handleCardRemove(evt, classConfig)
-  );
+  deleteButton.addEventListener(`click`, (evt) => handleCardRemove(evt, _id));
 
   if (likes.includes(apiConfig.myId)) {
     likeButton.classList.add(classConfig.likeActiveClass);

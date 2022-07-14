@@ -32,4 +32,11 @@ function postCard({ name, link }) {
   }).then(handleServerResponse);
 }
 
-export { getCards, getProfile, postCard };
+function deleteCard(cardId) {
+  return fetch(`${apiConfig.serverURL}/cards/${cardId}`, {
+    method: "DELETE",
+    headers: apiConfig.headers,
+  }).then(handleServerResponse);
+}
+
+export { getCards, getProfile, postCard, deleteCard };
