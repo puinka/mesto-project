@@ -1,6 +1,12 @@
 import "../css/pages/index.css";
 import { classConfig, apiConfig } from "./config.js";
-import { getCards, getProfile, patchProfile, postCard } from "./api.js";
+import {
+  getCards,
+  getProfile,
+  patchProfile,
+  patchAvatar,
+  postCard,
+} from "./api.js";
 import { renderElementsSection, generateCardElement } from "./cards.js";
 import { openPopup, closePopup } from "./popup.js";
 import { enableValidation } from "./validate.js";
@@ -53,6 +59,16 @@ function handleProfileFormSubmit(evt) {
     .catch((err) => console.log(err));
 }
 
+function handleAvatarFormSubmit(evt) {
+  evt.preventDefault();
+  patchAvatar(inputAvatarLink.value)
+    .then((user) => {
+      profileAvatar.src = user.avatar;
+      closePopup(popupEditAvatar);
+    })
+    .catch((err) => console.log(err));
+}
+
 function handleAddFormSubmit(evt, config) {
   evt.preventDefault();
   const place = { name: inputPlaceName.value, link: inputPlaceLink.value };
@@ -87,6 +103,10 @@ buttonEditAvatar.addEventListener(`click`, function () {
 
 formEditProfile.addEventListener(`submit`, (evt) =>
   handleProfileFormSubmit(evt, inputUserName, inputUserOccupation)
+);
+
+formEditAvatar.addEventListener(`submit`, (evt) =>
+  handleAvatarFormSubmit(evt, inputAvatarLink)
 );
 
 formAddPlace.addEventListener(`submit`, (evt) =>

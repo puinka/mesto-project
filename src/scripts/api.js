@@ -32,6 +32,16 @@ function patchProfile(name, about) {
   }).then(handleServerResponse);
 }
 
+function patchAvatar(link) {
+  return fetch(`${apiConfig.serverURL}/users/me/avatar`, {
+    method: "PATCH",
+    headers: apiConfig.headers,
+    body: JSON.stringify({
+      avatar: link,
+    }),
+  }).then(handleServerResponse);
+}
+
 function postCard({ name, link }) {
   return fetch(`${apiConfig.serverURL}/cards`, {
     method: "POST",
@@ -50,4 +60,11 @@ function deleteCard(cardId) {
   }).then(handleServerResponse);
 }
 
-export { getCards, getProfile, patchProfile, postCard, deleteCard };
+export {
+  getCards,
+  getProfile,
+  patchProfile,
+  patchAvatar,
+  postCard,
+  deleteCard,
+};
