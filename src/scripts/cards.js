@@ -21,7 +21,7 @@ function toggleLike(evt, item) {
   evt.target.classList.toggle(item.likeActiveClass);
 }
 
-export function generateCardElement({ name, link }) {
+function generateCardElement({ name, link }) {
   const cardTemplate = document.querySelector(`#card-template`).content;
   const cardElement = cardTemplate.querySelector(`.element`).cloneNode(true);
   const deleteButton = cardElement.querySelector(`.element__delete-button`);
@@ -42,3 +42,12 @@ export function generateCardElement({ name, link }) {
 
   return cardElement;
 }
+
+function renderElementsSection(arr, container) {
+  arr.forEach((item) => {
+    const card = generateCardElement(item);
+    container.append(card);
+  });
+}
+
+export { renderElementsSection };
