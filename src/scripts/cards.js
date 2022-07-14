@@ -1,4 +1,4 @@
-import { classConfig } from "./config.js";
+import { apiConfig, classConfig } from "./config.js";
 import { openPopup } from "./popup.js";
 
 //View photo popup elements
@@ -21,7 +21,7 @@ function toggleLike(evt, item) {
   evt.target.classList.toggle(item.likeActiveClass);
 }
 
-function generateCardElement({ name, link }) {
+function generateCardElement({ name, link, owner }) {
   const cardTemplate = document.querySelector(`#card-template`).content;
   const cardElement = cardTemplate.querySelector(`.element`).cloneNode(true);
   const deleteButton = cardElement.querySelector(`.element__delete-button`);
@@ -31,6 +31,10 @@ function generateCardElement({ name, link }) {
   cardPhoto.src = link;
   cardPhoto.alt = name;
   cardElement.querySelector(`.element__title`).textContent = name;
+
+  if (owner._id !== apiConfig.myId) {
+    deleteButton.remove();
+  }
 
   deleteButton.addEventListener(`click`, (evt) =>
     handleCardRemove(evt, classConfig)
