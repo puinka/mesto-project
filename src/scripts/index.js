@@ -1,6 +1,6 @@
 import "../css/pages/index.css";
 import { initialCards } from "./data.js";
-import { classConfig } from "./config.js";
+import { classConfig, apiConfig } from "./config.js";
 import { generateCardElement } from "./cards.js";
 import { openPopup, closePopup } from "./popup.js";
 import { enableValidation } from "./validate.js";
@@ -100,3 +100,17 @@ renderElementsSection(initialCards);
 
 //validation
 enableValidation(classConfig);
+
+//test
+
+fetch("https://nomoreparties.co/v1/plus-cohort-12/users/me", {
+  method: "GET",
+  headers: {
+    authorization: apiConfig.token,
+    "Content-Type": "application/json",
+  },
+})
+  .then((res) => res.json())
+  .then((result) => {
+    console.log(result);
+  });
