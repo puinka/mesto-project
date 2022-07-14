@@ -1,7 +1,7 @@
 import "../css/pages/index.css";
 import { classConfig, apiConfig } from "./config.js";
-import { getCards, getProfile } from "./api.js";
-import { renderElementsSection } from "./cards.js";
+import { getCards, getProfile, postCard } from "./api.js";
+import { renderElementsSection, generateCardElement } from "./cards.js";
 import { openPopup, closePopup } from "./popup.js";
 import { enableValidation } from "./validate.js";
 
@@ -51,11 +51,16 @@ function handleProfileFormSubmit(evt) {
 
 function handleAddFormSubmit(evt, config) {
   evt.preventDefault();
-  const buttonElement = evt.target.elements.create;
-  closePopup(popupAddPlace);
   const place = { name: inputPlaceName.value, link: inputPlaceLink.value };
-  const card = generateCardElement(place);
-  elementsSection.prepend(card);
+  postCard(place)
+    .then((item) => {
+      const card = generateCardElement(item);
+      elementsSection.prepend(card);
+      closePopup(popupAddPlace);
+    })
+    .catch((err) => console.log(err));
+
+  const buttonElement = evt.target.elements.create;
   buttonElement.classList.add(config.buttonDisabledClass);
   buttonElement.disabled = true;
   evt.target.reset();

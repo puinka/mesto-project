@@ -20,6 +20,10 @@ function handleCardRemove(evt, item) {
 function toggleLike(evt, item) {
   evt.target.classList.toggle(item.likeActiveClass);
 }
+function handleLikeClick(evt) {
+  evt.preventDefault();
+  console.log("Click like!");
+}
 
 function generateCardElement({ name, link, owner, likes }) {
   const cardTemplate = document.querySelector(`#card-template`).content;
@@ -50,6 +54,8 @@ function generateCardElement({ name, link, owner, likes }) {
 
   //likeButton.addEventListener(`click`, (evt) => toggleLike(evt, classConfig));
 
+  likeButton.addEventListener(`click`, (evt) => handleLikeClick(evt));
+
   cardPhoto.addEventListener(`click`, () => handleImageView(name, link));
 
   return cardElement;
@@ -62,4 +68,4 @@ function renderElementsSection(arr, container) {
   });
 }
 
-export { renderElementsSection };
+export { generateCardElement, renderElementsSection };

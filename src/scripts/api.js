@@ -21,4 +21,15 @@ function getProfile() {
   }).then(handleServerResponse);
 }
 
-export { getCards, getProfile };
+function postCard({ name, link }) {
+  return fetch(`${apiConfig.serverURL}/cards`, {
+    method: "POST",
+    headers: apiConfig.headers,
+    body: JSON.stringify({
+      name: name,
+      link: link,
+    }),
+  }).then(handleServerResponse);
+}
+
+export { getCards, getProfile, postCard };
