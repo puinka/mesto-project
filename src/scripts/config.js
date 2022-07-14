@@ -1,11 +1,13 @@
 const classConfig = {
-  formClass: ".form",
-  textInputClass: ".form__text-input",
-  submitButtonClass: ".form__submit-button",
-  inputErrorClass: "form__text-input_type_error",
-  buttonDisabledClass: "form__submit-button_inactive",
-  cardClass: ".element",
-  likeActiveClass: "element__like-button-active",
+  formClass: `.form`,
+  textInputClass: `.form__text-input`,
+  submitButtonClass: `.form__submit-button`,
+  inputErrorClass: `form__text-input_type_error`,
+  buttonDisabledClass: `form__submit-button_inactive`,
+  cardClass: `.element`,
+  deleteButtonClass: `.element__delete-button`,
+  likeButtonClass: `.element__like-button`,
+  likeActiveClass: `element__like-button-active`,
 };
 
 const apiConfig = {

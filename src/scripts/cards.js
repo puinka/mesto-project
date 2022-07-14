@@ -21,16 +21,20 @@ function toggleLike(evt, item) {
   evt.target.classList.toggle(item.likeActiveClass);
 }
 
-function generateCardElement({ name, link, owner }) {
+function generateCardElement({ name, link, owner, likes }) {
   const cardTemplate = document.querySelector(`#card-template`).content;
-  const cardElement = cardTemplate.querySelector(`.element`).cloneNode(true);
-  const deleteButton = cardElement.querySelector(`.element__delete-button`);
-  const likeButton = cardElement.querySelector(`.element__like-button`);
+  const cardElement = cardTemplate
+    .querySelector(classConfig.cardClass)
+    .cloneNode(true);
+  const deleteButton = cardElement.querySelector(classConfig.deleteButtonClass);
+  const likeButton = cardElement.querySelector(classConfig.likeButtonClass);
+  const likesAmount = cardElement.querySelector(`.element__likes-amount`);
   const cardPhoto = cardElement.querySelector(`.element__image`);
 
   cardPhoto.src = link;
   cardPhoto.alt = name;
   cardElement.querySelector(`.element__title`).textContent = name;
+  likesAmount.textContent = likes.length;
 
   if (owner._id !== apiConfig.myId) {
     deleteButton.remove();
