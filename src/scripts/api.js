@@ -21,6 +21,17 @@ function getProfile() {
   }).then(handleServerResponse);
 }
 
+function patchProfile(name, about) {
+  return fetch(`${apiConfig.serverURL}/users/me`, {
+    method: "PATCH",
+    headers: apiConfig.headers,
+    body: JSON.stringify({
+      name: name,
+      about: about,
+    }),
+  }).then(handleServerResponse);
+}
+
 function postCard({ name, link }) {
   return fetch(`${apiConfig.serverURL}/cards`, {
     method: "POST",
@@ -39,4 +50,4 @@ function deleteCard(cardId) {
   }).then(handleServerResponse);
 }
 
-export { getCards, getProfile, postCard, deleteCard };
+export { getCards, getProfile, patchProfile, postCard, deleteCard };

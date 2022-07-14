@@ -1,6 +1,6 @@
 import "../css/pages/index.css";
 import { classConfig, apiConfig } from "./config.js";
-import { getCards, getProfile, postCard } from "./api.js";
+import { getCards, getProfile, patchProfile, postCard } from "./api.js";
 import { renderElementsSection, generateCardElement } from "./cards.js";
 import { openPopup, closePopup } from "./popup.js";
 import { enableValidation } from "./validate.js";
@@ -44,9 +44,13 @@ function fillEditProfileInputs() {
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
-  profileUserName.textContent = inputUserName.value;
-  profileUserOccupation.textContent = inputUserOccupation.value;
-  closePopup(popupEditProfile);
+  patchProfile(inputUserName.value, inputUserOccupation.value)
+    .then((user) => {
+      profileUserName.textContent = user.name;
+      profileUserOccupation.textContent = user.about;
+      closePopup(popupEditProfile);
+    })
+    .catch((err) => console.log(err));
 }
 
 function handleAddFormSubmit(evt, config) {
@@ -81,7 +85,10 @@ buttonEditAvatar.addEventListener(`click`, function () {
   openPopup(popupEditAvatar);
 });
 
-formEditProfile.addEventListener(`submit`, handleProfileFormSubmit);
+formEditProfile.addEventListener(`submit`, (evt) =>
+  handleProfileFormSubmit(evt, inputUserName, inputUserOccupation)
+);
+
 formAddPlace.addEventListener(`submit`, (evt) =>
   handleAddFormSubmit(evt, classConfig)
 );
