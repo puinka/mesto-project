@@ -44,7 +44,11 @@ function generateCardElement({ name, link, owner, likes }) {
     handleCardRemove(evt, classConfig)
   );
 
-  likeButton.addEventListener(`click`, (evt) => toggleLike(evt, classConfig));
+  if (likes.includes(apiConfig.myId)) {
+    likeButton.classList.add(classConfig.likeActiveClass);
+  }
+
+  //likeButton.addEventListener(`click`, (evt) => toggleLike(evt, classConfig));
 
   cardPhoto.addEventListener(`click`, () => handleImageView(name, link));
 
