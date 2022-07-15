@@ -12,6 +12,11 @@ function handlePopupOverlayClick(evt) {
   }
 }
 
+function handlePopupCloseClick(button) {
+  const popup = button.closest(`.popup`);
+  closePopup(popup);
+}
+
 function openPopup(popup) {
   popup.classList.add(`popup_open`);
   document.addEventListener(`keydown`, handleEscKey);
@@ -24,4 +29,4 @@ function closePopup(popup) {
   popup.removeEventListener(`mousedown`, handlePopupOverlayClick);
 }
 
-export { openPopup, closePopup };
+export { openPopup, handlePopupCloseClick };

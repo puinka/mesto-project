@@ -12,7 +12,7 @@ import {
   generateCardElement,
   handleLikeClick,
 } from "./cards.js";
-import { openPopup, closePopup } from "./popup.js";
+import { openPopup, handlePopupCloseClick } from "./popup.js";
 import { enableValidation } from "./validate.js";
 
 const elementsSection = document.querySelector(`.elements`);
@@ -133,11 +133,10 @@ formAddPlace.addEventListener(`submit`, (evt) =>
   handleAddFormSubmit(evt, classConfig)
 );
 
-popupCloseButtons.forEach(function (button) {
-  button.addEventListener(`click`, function () {
-    const popup = button.closest(`.popup`);
-    closePopup(popup);
-  });
+document.addEventListener(`click`, (evt) => {
+  if (evt.target.classList.contains(`popup__close-button`)) {
+    handlePopupCloseClick(evt.target);
+  }
 });
 
 elementsSection.addEventListener(`click`, (evt) => {
