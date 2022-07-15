@@ -27,9 +27,6 @@ const buttonEditProfile = profile.querySelector(`.profile__edit-button`);
 const buttonAddPlace = profile.querySelector(`.profile__add-button`);
 const buttonEditAvatar = profile.querySelector(`.profile__avatar-edit-button`);
 
-//All close popup buttons
-const popupCloseButtons = document.querySelectorAll(`.popup__close-button`);
-
 //Edit Profile popup elements
 const popupEditProfile = document.querySelector(`.popup_type_edit-profile`);
 const formEditProfile = document.forms.editProfile;
@@ -156,9 +153,11 @@ elementsSection.addEventListener(`click`, (evt) => {
 enableValidation(classConfig);
 
 //render page
-Promise.all([getProfile(), getCards()]).then(([profile, cards]) => {
-  profileUserName.textContent = profile.name;
-  profileUserOccupation.textContent = profile.about;
-  profileAvatar.src = profile.avatar;
-  renderElementsSection(cards, elementsSection);
-});
+Promise.all([getProfile(), getCards()])
+  .then(([profile, cards]) => {
+    profileUserName.textContent = profile.name;
+    profileUserOccupation.textContent = profile.about;
+    profileAvatar.src = profile.avatar;
+    renderElementsSection(cards, elementsSection);
+  })
+  .catch((err) => console.log(err));

@@ -26,8 +26,6 @@ function handleCardRemove(removeButton) {
   confirmationButton.addEventListener(`click`, () =>
     confirmCardRemove(parentCard, cardId)
   );
-  // parentCard.remove();
-  // deleteCard(cardId);
 }
 
 function confirmCardRemove(card, cardId) {
@@ -78,8 +76,6 @@ function generateCardElement({ name, link, owner, likes, _id }) {
   if (owner._id !== apiConfig.myId) {
     deleteButton.remove();
   }
-
-  //deleteButton.addEventListener(`click`, (evt) => handleCardRemove(evt, _id));
 
   if (likes.some((item) => item._id === apiConfig.myId)) {
     likeButton.classList.add(classConfig.likeActiveClass);
