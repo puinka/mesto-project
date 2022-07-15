@@ -1,4 +1,4 @@
-import { deleteCard } from "./api.js";
+import { deleteCard, giveLike, takeLike } from "./api.js";
 import { apiConfig, classConfig } from "./config.js";
 import { openPopup } from "./popup.js";
 
@@ -19,12 +19,26 @@ function handleCardRemove(evt, cardId) {
   deleteCard(cardId);
 }
 
-function toggleLike(evt, item) {
-  evt.target.classList.toggle(item.likeActiveClass);
-}
-function handleLikeClick(evt) {
-  evt.preventDefault();
-  console.log("Click like!");
+function handleLikeClick(likeButton) {
+  const parentCard = likeButton.closest(classConfig.cardClass);
+  const cardId = parentCard.dataset.parent;
+  const likesCounter = parentCard.querySelector(classConfig.likesCounter);
+
+  if (!likeButton.classList.contains(classConfig.likeActiveClass)) {
+    giveLike(cardId)
+      .then((data) => {
+        likeButton.classList.add(classConfig.likeActiveClass);
+        likesCounter.textContent = `${data.likes.length}`;
+      })
+      .catch((err) => console.log(err));
+  } else {
+    takeLike(cardId)
+      .then((data) => {
+        likeButton.classList.remove(classConfig.likeActiveClass);
+        likesCounter.textContent = `${data.likes.length}`;
+      })
+      .catch((err) => console.log(err));
+  }
 }
 
 function generateCardElement({ name, link, owner, likes, _id }) {
@@ -34,12 +48,13 @@ function generateCardElement({ name, link, owner, likes, _id }) {
     .cloneNode(true);
   const deleteButton = cardElement.querySelector(classConfig.deleteButtonClass);
   const likeButton = cardElement.querySelector(classConfig.likeButtonClass);
-  const likesAmount = cardElement.querySelector(`.element__likes-amount`);
-  const cardPhoto = cardElement.querySelector(`.element__image`);
+  const likesAmount = cardElement.querySelector(classConfig.likesCounter);
+  const cardPhoto = cardElement.querySelector(classConfig.cardPhoto);
 
+  cardElement.setAttribute(`data-parent`, _id);
   cardPhoto.src = link;
   cardPhoto.alt = name;
-  cardElement.querySelector(`.element__title`).textContent = name;
+  cardElement.querySelector(classConfig.cardTitle).textContent = name;
   likesAmount.textContent = likes.length;
 
   if (owner._id !== apiConfig.myId) {
@@ -48,13 +63,9 @@ function generateCardElement({ name, link, owner, likes, _id }) {
 
   deleteButton.addEventListener(`click`, (evt) => handleCardRemove(evt, _id));
 
-  if (likes.includes(apiConfig.myId)) {
+  if (likes.some((item) => item._id === apiConfig.myId)) {
     likeButton.classList.add(classConfig.likeActiveClass);
   }
-
-  //likeButton.addEventListener(`click`, (evt) => toggleLike(evt, classConfig));
-
-  likeButton.addEventListener(`click`, (evt) => handleLikeClick(evt));
 
   cardPhoto.addEventListener(`click`, () => handleImageView(name, link));
 
@@ -68,4 +79,4 @@ function renderElementsSection(arr, container) {
   });
 }
 
-export { generateCardElement, renderElementsSection };
+export { generateCardElement, renderElementsSection, handleLikeClick };

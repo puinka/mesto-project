@@ -7,7 +7,11 @@ import {
   patchAvatar,
   postCard,
 } from "./api.js";
-import { renderElementsSection, generateCardElement } from "./cards.js";
+import {
+  renderElementsSection,
+  generateCardElement,
+  handleLikeClick,
+} from "./cards.js";
 import { openPopup, closePopup } from "./popup.js";
 import { enableValidation } from "./validate.js";
 
@@ -134,6 +138,12 @@ popupCloseButtons.forEach(function (button) {
     const popup = button.closest(`.popup`);
     closePopup(popup);
   });
+});
+
+elementsSection.addEventListener(`click`, (evt) => {
+  if (evt.target.classList.contains(`element__like-button`)) {
+    handleLikeClick(evt.target);
+  }
 });
 
 //validation

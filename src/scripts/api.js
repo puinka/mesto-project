@@ -60,6 +60,20 @@ function deleteCard(cardId) {
   }).then(handleServerResponse);
 }
 
+function giveLike(cardId) {
+  return fetch(`${apiConfig.serverURL}/cards/likes/${cardId}`, {
+    method: "PUT",
+    headers: apiConfig.headers,
+  }).then(handleServerResponse);
+}
+
+function takeLike(cardId) {
+  return fetch(`${apiConfig.serverURL}/cards/likes/${cardId}`, {
+    method: "DELETE",
+    headers: apiConfig.headers,
+  }).then(handleServerResponse);
+}
+
 export {
   getCards,
   getProfile,
@@ -67,4 +81,6 @@ export {
   patchAvatar,
   postCard,
   deleteCard,
+  giveLike,
+  takeLike,
 };
