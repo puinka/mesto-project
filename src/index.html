@@ -166,6 +166,24 @@
       </div>
     </div>
 
+    <div class="popup popup_type_confirm-removal">
+      <div class="popup__container">
+        <button class="popup__close-button" type="button"></button>
+        <h3 class="popup__title">Вы уверены?</h3>
+        <form
+          action="submit"
+          method="post"
+          class="form form_type_confirm-removal"
+          name="confirmRemoval"
+          novalidate
+        >
+          <button class="form__submit-button" type="submit" name="confirm">
+            Да
+          </button>
+        </form>
+      </div>
+    </div>
+
     <template id="card-template">
       <article class="element">
         <img class="element__image" />

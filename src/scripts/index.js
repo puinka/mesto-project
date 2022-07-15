@@ -1,5 +1,5 @@
 import "../css/pages/index.css";
-import { classConfig, apiConfig } from "./config.js";
+import { classConfig } from "./config.js";
 import {
   getCards,
   getProfile,
@@ -11,8 +11,9 @@ import {
   renderElementsSection,
   generateCardElement,
   handleLikeClick,
+  handleCardRemove,
 } from "./cards.js";
-import { openPopup, handlePopupCloseClick } from "./popup.js";
+import { openPopup, closePopup, handlePopupCloseClick } from "./popup.js";
 import { enableValidation } from "./validate.js";
 
 const elementsSection = document.querySelector(`.elements`);
@@ -136,6 +137,12 @@ formAddPlace.addEventListener(`submit`, (evt) =>
 document.addEventListener(`click`, (evt) => {
   if (evt.target.classList.contains(`popup__close-button`)) {
     handlePopupCloseClick(evt.target);
+  }
+});
+
+elementsSection.addEventListener(`click`, (evt) => {
+  if (evt.target.classList.contains(`element__delete-button`)) {
+    handleCardRemove(evt.target);
   }
 });
 

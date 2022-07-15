@@ -29,4 +29,4 @@ function closePopup(popup) {
   popup.removeEventListener(`mousedown`, handlePopupOverlayClick);
 }
 
-export { openPopup, handlePopupCloseClick };
+export { openPopup, closePopup, handlePopupCloseClick };
