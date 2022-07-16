@@ -82,14 +82,14 @@ function handleAvatarFormSubmit(evt) {
     });
 }
 
-function handleAddFormSubmit(evt) {
+function handleAddFormSubmit(evt, myId) {
   evt.preventDefault();
   const buttonElement = evt.target.elements.create;
   buttonElement.textContent = `Сохранение...`;
   const place = { name: inputPlaceName.value, link: inputPlaceLink.value };
   postCard(place)
     .then((item) => {
-      const card = generateCardElement(item);
+      const card = generateCardElement(item, myId);
       elementsSection.prepend(card);
       closePopup(popupAddPlace);
     })
@@ -126,7 +126,7 @@ formEditAvatar.addEventListener(`submit`, (evt) =>
 );
 
 formAddPlace.addEventListener(`submit`, (evt) =>
-  handleAddFormSubmit(evt, classConfig)
+  handleAddFormSubmit(evt, myId)
 );
 
 document.addEventListener(`click`, (evt) => {
