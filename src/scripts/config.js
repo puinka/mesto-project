@@ -19,7 +19,6 @@ const apiConfig = {
     authorization: "990d24ba-7f92-4fb3-a188-40b44340a14f",
     "Content-Type": "application/json",
   },
-  myId: "99940304ad2c3596bb816b80",
 };
 
 export { classConfig, apiConfig };

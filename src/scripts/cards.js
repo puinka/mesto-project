@@ -55,7 +55,7 @@ function handleLikeClick(cardId, likeButton, likesCounter) {
   }
 }
 
-function generateCardElement({ name, link, owner, likes, _id }) {
+function generateCardElement({ name, link, owner, likes, _id }, myId) {
   const cardElement = cardTemplate
     .querySelector(classConfig.cardClass)
     .cloneNode(true);
@@ -70,7 +70,7 @@ function generateCardElement({ name, link, owner, likes, _id }) {
   cardElement.querySelector(classConfig.cardTitle).textContent = name;
   likesCounter.textContent = likes.length;
 
-  if (owner._id !== apiConfig.myId) {
+  if (owner._id !== myId) {
     deleteButton.remove();
   }
 
@@ -79,7 +79,7 @@ function generateCardElement({ name, link, owner, likes, _id }) {
     confirmationPopup.dataset.id = _id;
   });
 
-  if (likes.some((item) => item._id === apiConfig.myId)) {
+  if (likes.some((item) => item._id === myId)) {
     likeButton.classList.add(classConfig.likeActiveClass);
   }
 
@@ -92,9 +92,9 @@ function generateCardElement({ name, link, owner, likes, _id }) {
   return cardElement;
 }
 
-function renderElementsSection(arr, container) {
+function renderElementsSection(arr, container, myId) {
   arr.forEach((item) => {
-    const card = generateCardElement(item);
+    const card = generateCardElement(item, myId);
     container.append(card);
   });
 }

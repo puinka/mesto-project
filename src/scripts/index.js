@@ -39,6 +39,9 @@ const popupEditAvatar = document.querySelector(`.popup_type_edit-avatar`);
 const formEditAvatar = document.forms.editAvatar;
 const inputAvatarLink = formEditAvatar.elements.avatarLink;
 
+//User ID
+let myId;
+
 //functions
 function fillEditProfileInputs() {
   inputUserName.value = profileUserName.textContent;
@@ -138,9 +141,10 @@ enableValidation(classConfig);
 //render page
 Promise.all([getProfile(), getCards()])
   .then(([profile, cards]) => {
+    myId = profile._id;
     profileUserName.textContent = profile.name;
     profileUserOccupation.textContent = profile.about;
     profileAvatar.src = profile.avatar;
-    renderElementsSection(cards, elementsSection);
+    renderElementsSection(cards, elementsSection, myId);
   })
   .catch((err) => console.log(err));
