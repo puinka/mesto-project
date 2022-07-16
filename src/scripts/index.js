@@ -7,12 +7,7 @@ import {
   patchAvatar,
   postCard,
 } from "./api.js";
-import {
-  renderElementsSection,
-  generateCardElement,
-  handleLikeClick,
-  handleCardRemove,
-} from "./cards.js";
+import { renderElementsSection, generateCardElement } from "./cards.js";
 import { openPopup, closePopup, handlePopupCloseClick } from "./popup.js";
 import { enableValidation } from "./validate.js";
 
@@ -134,18 +129,6 @@ formAddPlace.addEventListener(`submit`, (evt) =>
 document.addEventListener(`click`, (evt) => {
   if (evt.target.classList.contains(`popup__close-button`)) {
     handlePopupCloseClick(evt.target);
-  }
-});
-
-elementsSection.addEventListener(`click`, (evt) => {
-  if (evt.target.classList.contains(`element__delete-button`)) {
-    handleCardRemove(evt.target);
-  }
-});
-
-elementsSection.addEventListener(`click`, (evt) => {
-  if (evt.target.classList.contains(`element__like-button`)) {
-    handleLikeClick(evt.target);
   }
 });
 

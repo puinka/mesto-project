@@ -7,8 +7,7 @@ function handleEscKey(evt) {
 
 function handlePopupOverlayClick(evt) {
   if (evt.target.classList.contains(`popup_open`)) {
-    const currentPopup = document.querySelector(`.popup_open`);
-    closePopup(currentPopup);
+    closePopup(evt.target);
   }
 }
 

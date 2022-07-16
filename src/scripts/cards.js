@@ -2,6 +2,8 @@ import { deleteCard, giveLike, takeLike } from "./api.js";
 import { apiConfig, classConfig } from "./config.js";
 import { openPopup, closePopup } from "./popup.js";
 
+const cardTemplate = document.querySelector(`#card-template`).content;
+
 //View photo popup elements
 const viewPhotoPopup = document.querySelector(`.popup_type_view-photo`);
 const popupCaption = viewPhotoPopup.querySelector(`.popup__caption`);
@@ -12,6 +14,11 @@ const confirmationPopup = document.querySelector(`.popup_type_confirm-removal`);
 const confirmationButton =
   confirmationPopup.querySelector(`.form__submit-button`);
 
+confirmationButton.addEventListener(`click`, () => {
+  const cardId = confirmationPopup.dataset.id;
+  handleCardRemove(cardId);
+});
+
 function handleImageView(name, link) {
   popupImage.setAttribute(`src`, link);
   popupImage.setAttribute(`alt`, name);
@@ -19,27 +26,18 @@ function handleImageView(name, link) {
   openPopup(viewPhotoPopup);
 }
 
-function handleCardRemove(removeButton) {
-  const parentCard = removeButton.closest(classConfig.cardClass);
-  const cardId = parentCard.dataset.parent;
-  openPopup(confirmationPopup);
-  confirmationButton.addEventListener(`click`, () =>
-    confirmCardRemove(parentCard, cardId)
-  );
+function handleCardRemove(cardId) {
+  const currentCard = document.querySelector(`[data-id='${cardId}']`);
+
+  deleteCard(cardId)
+    .then(() => {
+      closePopup(confirmationPopup);
+      currentCard.remove();
+    })
+    .catch((err) => console.log(err));
 }
 
-function confirmCardRemove(card, cardId) {
-  card.remove();
-  deleteCard(cardId);
-  closePopup(confirmationPopup);
-  confirmationButton.removeEventListener(`click`, confirmCardRemove);
-}
-
-function handleLikeClick(likeButton) {
-  const parentCard = likeButton.closest(classConfig.cardClass);
-  const cardId = parentCard.dataset.parent;
-  const likesCounter = parentCard.querySelector(classConfig.likesCounter);
-
+function handleLikeClick(cardId, likeButton, likesCounter) {
   if (!likeButton.classList.contains(classConfig.likeActiveClass)) {
     giveLike(cardId)
       .then((data) => {
@@ -58,28 +56,36 @@ function handleLikeClick(likeButton) {
 }
 
 function generateCardElement({ name, link, owner, likes, _id }) {
-  const cardTemplate = document.querySelector(`#card-template`).content;
   const cardElement = cardTemplate
     .querySelector(classConfig.cardClass)
     .cloneNode(true);
   const deleteButton = cardElement.querySelector(classConfig.deleteButtonClass);
   const likeButton = cardElement.querySelector(classConfig.likeButtonClass);
-  const likesAmount = cardElement.querySelector(classConfig.likesCounter);
+  const likesCounter = cardElement.querySelector(classConfig.likesCounter);
   const cardPhoto = cardElement.querySelector(classConfig.cardPhoto);
 
-  cardElement.setAttribute(`data-parent`, _id);
+  cardElement.dataset.id = _id;
   cardPhoto.src = link;
   cardPhoto.alt = name;
   cardElement.querySelector(classConfig.cardTitle).textContent = name;
-  likesAmount.textContent = likes.length;
+  likesCounter.textContent = likes.length;
 
   if (owner._id !== apiConfig.myId) {
     deleteButton.remove();
   }
 
+  deleteButton.addEventListener(`click`, () => {
+    openPopup(confirmationPopup);
+    confirmationPopup.dataset.id = _id;
+  });
+
   if (likes.some((item) => item._id === apiConfig.myId)) {
     likeButton.classList.add(classConfig.likeActiveClass);
   }
+
+  likeButton.addEventListener(`click`, () => {
+    handleLikeClick(_id, likeButton, likesCounter);
+  });
 
   cardPhoto.addEventListener(`click`, () => handleImageView(name, link));
 
@@ -93,9 +99,4 @@ function renderElementsSection(arr, container) {
   });
 }
 
-export {
-  generateCardElement,
-  renderElementsSection,
-  handleLikeClick,
-  handleCardRemove,
-};
+export { generateCardElement, renderElementsSection, handleCardRemove };
