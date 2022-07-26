@@ -13,4 +13,6 @@ const classConfig = {
   cardTitle: `.element__title`,
 };
 
+export const cardTemplate = document.querySelector(`#card-template`).content;
+
 export { classConfig };

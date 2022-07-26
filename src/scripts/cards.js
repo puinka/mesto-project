@@ -1,5 +1,5 @@
 import { deleteCard, giveLike, takeLike } from "./api.js";
-import { apiConfig, classConfig } from "./config.js";
+import { classConfig } from "./utils/constants.js";
 import { openPopup, closePopup } from "./popup.js";
 
 const cardTemplate = document.querySelector(`#card-template`).content;
