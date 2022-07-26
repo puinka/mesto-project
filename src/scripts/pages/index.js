@@ -1,15 +1,15 @@
 import "../css/pages/index.css";
-import { classConfig } from "./config.js";
+import { classConfig } from "../config.js";
 import {
   getCards,
   getProfile,
   patchProfile,
   patchAvatar,
   postCard,
-} from "./api.js";
-import { renderElementsSection, generateCardElement } from "./cards.js";
-import { openPopup, closePopup, handlePopupCloseClick } from "./popup.js";
-import { enableValidation } from "./validate.js";
+} from "../api.js";
+import { renderElementsSection, generateCardElement } from "../cards.js";
+import { openPopup, closePopup, handlePopupCloseClick } from "../popup.js";
+import { enableValidation } from "../validate.js";
 
 const elementsSection = document.querySelector(`.elements`);
 
