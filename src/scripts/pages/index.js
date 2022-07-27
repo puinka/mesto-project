@@ -1,5 +1,5 @@
 import "../../css/pages/index.css";
-import { classConfig } from "./utils/constants.js";
+import { classConfig } from "../utils/constants.js";
 import {
   getCards,
   getProfile,
