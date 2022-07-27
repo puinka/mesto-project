@@ -31,9 +31,10 @@ export default class Popup {
     }
   }
 
-  //повесить EventListeners
-
-  _handlePopupCloseClick() {
-    this.close();
+  //публичный метод setEventListeners, который добавляет слушатель клика иконке закрытия попапа
+  setEventListeners() {
+    this._closeButton.addEventListener(`click`, () => {
+      this.close();
+    });
   }
 }
