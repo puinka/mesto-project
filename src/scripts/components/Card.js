@@ -90,10 +90,4 @@ export default class Card {
         return this._element;
         }
 
-    }
-
-
-
-
-
-cardElement.querySelector(classConfig.cardTitle).textContent = name;
+}

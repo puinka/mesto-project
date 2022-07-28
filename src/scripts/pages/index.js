@@ -1,5 +1,26 @@
 import "../../css/pages/index.css";
-import { classConfig } from "../utils/constants.js";
+import { 
+  classConfig, 
+  elementsSection,
+  profileUserName,
+  profileUserOccupation,
+  profileAvatar,
+  buttonEditProfile,
+  buttonAddPlace,
+  buttonEditAvatar,
+  popupEditProfile,
+  formEditProfile,
+  inputUserName,
+  inputUserOccupation,
+  popupAddPlace,
+  formAddPlace,
+  inputPlaceName,
+  inputPlaceLink,
+  popupEditAvatar,
+  formEditAvatar,
+  inputAvatarLink,
+  myId
+ } from "../utils/constants.js";
 import {
   getCards,
   getProfile,
@@ -10,37 +31,6 @@ import {
 import { renderElementsSection, generateCardElement } from "../cards.js";
 import { openPopup, closePopup, handlePopupCloseClick } from "../popup.js";
 import { enableValidation } from "../validate.js";
-
-const elementsSection = document.querySelector(`.elements`);
-
-//Profile elements
-const profile = document.querySelector(`.profile`);
-const profileUserName = profile.querySelector(`.profile__name`);
-const profileUserOccupation = profile.querySelector(`.profile__occupation`);
-const profileAvatar = profile.querySelector(`.profile__avatar-image`);
-const buttonEditProfile = profile.querySelector(`.profile__edit-button`);
-const buttonAddPlace = profile.querySelector(`.profile__add-button`);
-const buttonEditAvatar = profile.querySelector(`.profile__avatar-edit-button`);
-
-//Edit Profile popup elements
-const popupEditProfile = document.querySelector(`.popup_type_edit-profile`);
-const formEditProfile = document.forms.editProfile;
-const inputUserName = formEditProfile.elements.userName;
-const inputUserOccupation = formEditProfile.elements.userOccupation;
-
-//Add place popup elements
-const popupAddPlace = document.querySelector(`.popup_type_add-place`);
-const formAddPlace = document.forms.addPlace;
-const inputPlaceName = formAddPlace.elements.placeName;
-const inputPlaceLink = formAddPlace.elements.placeLink;
-
-//Edit avatar popup elements
-const popupEditAvatar = document.querySelector(`.popup_type_edit-avatar`);
-const formEditAvatar = document.forms.editAvatar;
-const inputAvatarLink = formEditAvatar.elements.avatarLink;
-
-//User ID
-let myId;
 
 //functions
 function fillEditProfileInputs() {
