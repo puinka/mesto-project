@@ -13,12 +13,13 @@ export default class Section {
 
   renderItems() {
     this._data.forEach((item) => {
-      this._renderer(item); // вызываем renderer, передав item
+      addItem(item);
     });
   }
 
   //Содержит публичный метод addItem, который принимает DOM-элемент и добавляет его в контейнер.
-  addItem(element) {
+  addItem(item) {
+    const element = this._renderer(item);
     this._container.prepend(element);
   }
 }
