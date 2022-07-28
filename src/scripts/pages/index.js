@@ -28,6 +28,7 @@ import {
   patchAvatar,
   postCard,
 } from "../api.js";
+import { Card } from "../components/Card.js";
 import { renderElementsSection, generateCardElement } from "../cards.js";
 import { openPopup, closePopup, handlePopupCloseClick } from "../popup.js";
 import { enableValidation } from "../validate.js";
@@ -138,3 +139,17 @@ Promise.all([getProfile(), getCards()])
     renderElementsSection(cards, elementsSection, myId);
   })
   .catch((err) => console.log(err));
+
+
+//вызов нашего класса для создания карточек
+const CardList = new Section({
+  //в data по идее должна записываться data из запросов getProfile и getCards (пока не знаю как)
+  data: data,
+  renderer: (item) => {
+    const card = new Card(item);
+    const element = card.generate();
+    CardList.addItem(element);
+  }
+}, containerSelector);
+
+CardList.renderItems();
