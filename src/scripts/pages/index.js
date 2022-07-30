@@ -1,37 +1,55 @@
 import "../../css/pages/index.css";
-import { 
-  classConfig, 
-  elementsSection,
-  profileUserName,
-  profileUserOccupation,
-  profileAvatar,
-  buttonEditProfile,
-  buttonAddPlace,
-  buttonEditAvatar,
-  popupEditProfile,
-  formEditProfile,
-  inputUserName,
-  inputUserOccupation,
-  popupAddPlace,
-  formAddPlace,
-  inputPlaceName,
-  inputPlaceLink,
-  popupEditAvatar,
-  formEditAvatar,
-  inputAvatarLink,
-  myId
- } from "../utils/constants.js";
-import {
-  getCards,
-  getProfile,
-  patchProfile,
-  patchAvatar,
-  postCard,
-} from "../api.js";
-import { Card } from "../components/Card.js";
+// import {
+//   classConfig,
+//   elementsSection,
+//   profileUserName,
+//   profileUserOccupation,
+//   profileAvatar,
+//   buttonEditProfile,
+//   buttonAddPlace,
+//   buttonEditAvatar,
+//   popupEditProfile,
+//   formEditProfile,
+//   inputUserName,
+//   inputUserOccupation,
+//   popupAddPlace,
+//   formAddPlace,
+//   inputPlaceName,
+//   inputPlaceLink,
+//   popupEditAvatar,
+//   formEditAvatar,
+//   inputAvatarLink,
+//   myId
+//  } from "../utils/constants.js";
+// import {
+//   getCards,
+//   getProfile,
+//   patchProfile,
+//   patchAvatar,
+//   postCard,
+// } from "../api.js";
+import Api from "../components/Api";
+//import { Card } from "../components/Card.js";
 import { renderElementsSection, generateCardElement } from "../cards.js";
 import { openPopup, closePopup, handlePopupCloseClick } from "../popup.js";
 import { enableValidation } from "../validate.js";
+import { apiConfig } from "../utils/constants";
+import {
+  buttonEditProfile,
+  buttonAddPlace,
+  buttonEditAvatar,
+  formEditProfile,
+  formEditAvatar,
+  formAddPlace,
+  classConfig,
+  profileUserName,
+  profileUserOccupation,
+  profileAvatar,
+  elementsSection,
+} from "../utils/constants.js";
+
+//User ID
+export let myId;
 
 //functions
 function fillEditProfileInputs() {
@@ -130,26 +148,27 @@ document.addEventListener(`click`, (evt) => {
 enableValidation(classConfig);
 
 //render page
-Promise.all([getProfile(), getCards()])
+const api = new Api(apiConfig);
+Promise.all([api.getProfile(), api.getCards()])
   .then(([profile, cards]) => {
     myId = profile._id;
     profileUserName.textContent = profile.name;
+    ``;
     profileUserOccupation.textContent = profile.about;
     profileAvatar.src = profile.avatar;
     renderElementsSection(cards, elementsSection, myId);
   })
   .catch((err) => console.log(err));
 
+// //вызов нашего класса для создания карточек
+// const CardList = new Section({
+//   //в data по идее должна записываться data из запросов getProfile и getCards (пока не знаю как)
+//   data: data,
+//   renderer: (item) => {
+//     const card = new Card(item);
+//     const element = card.generate();
+//     CardList.addItem(element);
+//   }
+// }, containerSelector);
 
-//вызов нашего класса для создания карточек
-const CardList = new Section({
-  //в data по идее должна записываться data из запросов getProfile и getCards (пока не знаю как)
-  data: data,
-  renderer: (item) => {
-    const card = new Card(item);
-    const element = card.generate();
-    CardList.addItem(element);
-  }
-}, containerSelector);
-
-CardList.renderItems();
+// CardList.renderItems();

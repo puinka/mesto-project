@@ -1,4 +1,4 @@
-import { apiConfig } from "./config.js";
+import { apiConfig } from "../scripts/utils/constants.js";
 
 function handleServerResponse(res) {
   if (res.ok) {
