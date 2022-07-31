@@ -18,7 +18,6 @@ import {
   profileUserName,
   profileUserOccupation,
   profileAvatar,
-  elementsSection,
 } from "../utils/constants.js";
 
 //User ID
@@ -131,26 +130,24 @@ Promise.all([api.getProfile(), api.getCards()])
     myId = profile._id;
     userInfo.getUserInfo(profile);
     userInfo.renderProfileInfo();
-    ``;
     userInfo.renderAvatar();
 
     //вызов нашего класса для создания карточек
-    const CardList = new Section(
+    const cardList = new Section(
       {
-        //в data по идее должна записываться data из запросов getProfile и getCards (пока не знаю как)
         data: cards,
         renderer: (item) => {
           const card = new Card(item);
           console.log("generate card item:", card);
           const element = card.generate();
-          console.log("generate card elemtn:", card.generate());
-          CardList.addItem(element);
+          console.log("generate card elemtn:", element);
+          cardList.addItem(element);
         },
       },
       classConfig.cardContainer
     );
 
     // renderElementsSection(cards, elementsSection, myId);
-    CardList.renderItems(cards);
+    cardList.renderItems();
   })
   .catch((err) => console.log(err));

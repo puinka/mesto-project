@@ -13,21 +13,21 @@ export default class Section {
 
   renderItems() {
     this._data.forEach((item) => {
-      console.log("render item", item);
+      //console.log("render item", item);
       this.addItem(item);
     });
   }
 
   //Содержит публичный метод addItem, который принимает DOM-элемент и добавляет его в контейнер.
-  // addItem(item) {
-  //   const element = this._renderer(item);
-  //   this._container.prepend(element);
-  // }
+  addItem(item) {
+    const element = this._renderer(item);
+    this._container.prepend(element);
+  }
 
   //сделал реализацию, как в тренажере
   //тут просто добавляем карточку, а сам метод вызываем при вызове класса в index.js
-  addItem(element) {
-    console.log("add item", element);
-    this._container.prepend(element);
-  }
+  // addItem(element) {
+  //   //console.log("add item", element);
+  //   this._container.prepend(element);
+  // }
 }
