@@ -59,7 +59,6 @@ export default class Card {
       confirmationPopup.dataset.id = _id;
     });
 
-    //посмотреть, нужно ли в параметрах указывать this._ пока не поняли
     this._cardPhoto.addEventListener(`click`, () =>
       handleImageView(this._name, this._link)
     );
@@ -67,7 +66,7 @@ export default class Card {
 
   generate() {
     this._element = this._getElement();
-    this._setEventListeners();
+    //this._setEventListeners();
 
     this._title = this._element.querySelector(classConfig.cardTitle);
     this._deleteButton = this._element.querySelector(

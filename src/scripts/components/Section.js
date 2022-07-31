@@ -21,6 +21,7 @@ export default class Section {
   //Содержит публичный метод addItem, который принимает DOM-элемент и добавляет его в контейнер.
   addItem(item) {
     const element = this._renderer(item);
+    //Valeria: отсюда должен выходить DOM элемент карточки на основе данных item, но получается undefined
     this._container.prepend(element);
   }
 
