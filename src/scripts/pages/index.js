@@ -28,7 +28,7 @@ import "../../css/pages/index.css";
 //   patchAvatar,
 //   postCard,
 // } from "../api.js";
-import Api from "../components/Api";
+import Api from "../components/Api.js";
 //import { Card } from "../components/Card.js";
 import { renderElementsSection, generateCardElement } from "../cards.js";
 import { openPopup, closePopup, handlePopupCloseClick } from "../popup.js";
@@ -47,6 +47,7 @@ import {
   profileAvatar,
   elementsSection,
 } from "../utils/constants.js";
+import { UserInfo } from "../components/UserInfo.js"
 
 //User ID
 export let myId;
@@ -149,17 +150,20 @@ enableValidation(classConfig);
 
 //render page
 const api = new Api(apiConfig);
+const userInfo = new UserInfo();
 Promise.all([api.getProfile(), api.getCards()])
   .then(([profile, cards]) => {
     myId = profile._id;
-    profileUserName.textContent = profile.name;
+    userInfo.getUserInfo(profile)
+    userInfo.renderProfileInfo();
     ``;
-    profileUserOccupation.textContent = profile.about;
-    profileAvatar.src = profile.avatar;
+    userInfo.renderAvatar();
     renderElementsSection(cards, elementsSection, myId);
   })
   .catch((err) => console.log(err));
 
+
+  
 // //вызов нашего класса для создания карточек
 // const CardList = new Section({
 //   //в data по идее должна записываться data из запросов getProfile и getCards (пока не знаю как)
