@@ -1,21 +1,10 @@
 import "../../css/pages/index.css";
 import Api from "../components/Api.js";
-import { Card } from "../components/Card.js";
-import {
-  renderElementsSection,
-  generateCardElement
-} from "../cards.js";
-import {
-  openPopup,
-  closePopup,
-  handlePopupCloseClick
-} from "../popup.js";
-import {
-  enableValidation
-} from "../validate.js";
-import {
-  apiConfig
-} from "../utils/constants";
+import Card from "../components/Card.js";
+import { renderElementsSection, generateCardElement } from "../cards.js";
+import { openPopup, closePopup, handlePopupCloseClick } from "../popup.js";
+import { enableValidation } from "../validate.js";
+import { apiConfig } from "../utils/constants";
 import {
   buttonEditProfile,
   buttonAddPlace,
@@ -29,12 +18,8 @@ import {
   profileAvatar,
   elementsSection,
 } from "../utils/constants.js";
-import {
-  UserInfo
-} from "../components/UserInfo.js"
-import {
-  Section
-} from "../components/Section.js"
+import { UserInfo } from "../components/UserInfo.js";
+import { Section } from "../components/Section.js";
 
 //User ID
 export let myId;
@@ -85,7 +70,7 @@ function handleAddFormSubmit(evt, myId) {
   buttonElement.textContent = `Сохранение...`;
   const place = {
     name: inputPlaceName.value,
-    link: inputPlaceLink.value
+    link: inputPlaceLink.value,
   };
   postCard(place)
     .then((item) => {
@@ -138,34 +123,34 @@ document.addEventListener(`click`, (evt) => {
 //validation
 enableValidation(classConfig);
 
-
-
 //render page
 const api = new Api(apiConfig);
 const userInfo = new UserInfo();
 Promise.all([api.getProfile(), api.getCards()])
   .then(([profile, cards]) => {
     myId = profile._id;
-    userInfo.getUserInfo(profile)
+    userInfo.getUserInfo(profile);
     userInfo.renderProfileInfo();
     ``;
     userInfo.renderAvatar();
 
     //вызов нашего класса для создания карточек
-    const CardList = new Section({
-      //в data по идее должна записываться data из запросов getProfile и getCards (пока не знаю как)
-      data: cards,
-      renderer: (item) => {
-        const card = new Card(item);
-        console.log('generate card item:', card)
-        const element = card.generate();
-        console.log('generate card elemtn:', card.generate())
-        CardList.addItem(element);
-      }
-    }, elementsSection);
+    const CardList = new Section(
+      {
+        //в data по идее должна записываться data из запросов getProfile и getCards (пока не знаю как)
+        data: cards,
+        renderer: (item) => {
+          const card = new Card(item);
+          console.log("generate card item:", card);
+          const element = card.generate();
+          console.log("generate card elemtn:", card.generate());
+          CardList.addItem(element);
+        },
+      },
+      elementsSection
+    );
 
     // renderElementsSection(cards, elementsSection, myId);
     CardList.renderItems(cards);
-
   })
   .catch((err) => console.log(err));
