@@ -66,7 +66,7 @@ export default class Card {
 
     generate() {
         this._element = this._getElement();
-        this._element = this._setEventListeners();
+        this._setEventListeners();
         
         const deleteButton = this._element.querySelector(classConfig.deleteButtonClass);
         const likeButton = this._element.querySelector(classConfig.likeButtonClass);
@@ -86,10 +86,10 @@ export default class Card {
         if (this._likes.some((item) => item._id === this._myId)) {
             likeButton.classList.add(classConfig.likeActiveClass);
         }
-        
-        return this._element;
+        console.log('generate card elemtn:', this._element)
+        // return this._element;
         }
-
+        
 }
 
 export {Card}

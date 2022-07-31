@@ -157,7 +157,9 @@ Promise.all([api.getProfile(), api.getCards()])
       data: cards,
       renderer: (item) => {
         const card = new Card(item);
+        console.log('generate card item:', card)
         const element = card.generate();
+        console.log('generate card elemtn:', card.generate())
         CardList.addItem(element);
       }
     }, elementsSection);

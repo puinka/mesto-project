@@ -13,6 +13,7 @@ export default class Section {
 
   renderItems() {
     this._data.forEach((item) => {
+      console.log('render item', item)
       this.addItem(item);
     });
   }
@@ -26,7 +27,7 @@ export default class Section {
   //сделал реализацию, как в тренажере
   //тут просто добавляем карточку, а сам метод вызываем при вызове класса в index.js
   addItem(element) {
-    // console.log(element)
+    console.log('add item', element)
     this._container.prepend(element);
 
   }
