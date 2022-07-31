@@ -6,14 +6,14 @@ export default class Section {
   constructor({ data, renderer }, containerSelector) {
     this._data = data;
     this._renderer = renderer;
-    this._container = document.querySelector('containerSelector');
+    this._container = document.querySelector(containerSelector);
   }
 
   //Содержит публичный метод, который отвечает за отрисовку всех элементов. Отрисовка каждого отдельного элемента должна осуществляться функцией renderer.
 
   renderItems() {
     this._data.forEach((item) => {
-      console.log('render item', item)
+      console.log("render item", item);
       this.addItem(item);
     });
   }
@@ -27,11 +27,7 @@ export default class Section {
   //сделал реализацию, как в тренажере
   //тут просто добавляем карточку, а сам метод вызываем при вызове класса в index.js
   addItem(element) {
-    console.log('add item', element)
+    console.log("add item", element);
     this._container.prepend(element);
-
   }
-
 }
-
-export {Section};

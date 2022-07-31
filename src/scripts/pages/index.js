@@ -1,6 +1,8 @@
 import "../../css/pages/index.css";
 import Api from "../components/Api.js";
+import Section from "../components/Section.js";
 import Card from "../components/Card.js";
+import UserInfo from "../components/UserInfo.js";
 import { renderElementsSection, generateCardElement } from "../cards.js";
 import { openPopup, closePopup, handlePopupCloseClick } from "../popup.js";
 import { enableValidation } from "../validate.js";
@@ -18,8 +20,6 @@ import {
   profileAvatar,
   elementsSection,
 } from "../utils/constants.js";
-import { UserInfo } from "../components/UserInfo.js";
-import { Section } from "../components/Section.js";
 
 //User ID
 export let myId;
