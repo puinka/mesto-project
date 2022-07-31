@@ -91,3 +91,5 @@ export default class Card {
         }
 
 }
+
+export {Card}
