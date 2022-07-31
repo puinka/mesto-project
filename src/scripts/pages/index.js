@@ -147,7 +147,7 @@ Promise.all([api.getProfile(), api.getCards()])
           CardList.addItem(element);
         },
       },
-      elementsSection
+      classConfig.cardContainer
     );
 
     // renderElementsSection(cards, elementsSection, myId);

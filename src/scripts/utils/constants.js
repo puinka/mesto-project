@@ -11,6 +11,7 @@ export const classConfig = {
   likeActiveClass: `element__like-button-active`,
   likesCounter: `.element__likes-amount`,
   cardTitle: `.element__title`,
+  cardContainer: `.elements`,
 };
 
 export const apiConfig = {
@@ -22,7 +23,7 @@ export const apiConfig = {
 };
 
 export const cardTemplate = document.querySelector(`#card-template`).content;
-export const elementsSection = document.querySelector(`.elements`);
+//export const elementsSection = document.querySelector(`.elements`);
 
 //Profile elements
 const profile = document.querySelector(`.profile`);
