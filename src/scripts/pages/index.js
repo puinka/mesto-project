@@ -21,7 +21,7 @@ import {
 } from "../utils/constants.js";
 
 //User ID
-export let myId;
+let myId;
 
 //functions
 function fillEditProfileInputs() {
