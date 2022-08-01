@@ -91,6 +91,6 @@ export default class Card {
       this._likeButton.classList.add(classConfig.likeActiveClass);
     }
     console.log("generate card elemtn:", this._element);
-    // return this._element;
+    return this._element;
   }
 }

@@ -3,7 +3,7 @@ import Api from "../components/Api.js";
 import Section from "../components/Section.js";
 import Card from "../components/Card.js";
 import UserInfo from "../components/UserInfo.js";
-import { renderElementsSection, generateCardElement } from "../cards.js";
+import { generateCardElement } from "../cards.js";
 import { openPopup, closePopup, handlePopupCloseClick } from "../popup.js";
 import { enableValidation } from "../validate.js";
 import { apiConfig } from "../utils/constants";
@@ -73,6 +73,8 @@ function handleAddFormSubmit(evt, myId) {
   };
   postCard(place)
     .then((item) => {
+      //TODO
+      //тут использовать cardList.addItem();
       const card = generateCardElement(item, myId);
       elementsSection.prepend(card);
       closePopup(popupAddPlace);
@@ -122,6 +124,12 @@ document.addEventListener(`click`, (evt) => {
 //validation
 enableValidation(classConfig);
 
+//сгенерировать одну карточку
+function generateCard(data) {
+  const card = new Card(data, myId);
+  return card.generate();
+}
+
 //render page
 const api = new Api(apiConfig);
 const userInfo = new UserInfo();
@@ -132,21 +140,8 @@ Promise.all([api.getProfile(), api.getCards()])
     userInfo.renderProfileInfo();
     userInfo.renderAvatar();
 
-    //вызов нашего класса для создания карточек
-    const cardList = new Section(
-      {
-        data: cards,
-        renderer: (item) => {
-          const card = new Card(item);
-          // const element = card.generate();
-          // console.log("generate card elemtn:", element);
-          return card.generate();
-        },
-      },
-      classConfig.cardContainer
-    );
-
-    // renderElementsSection(cards, elementsSection, myId);
-    cardList.renderItems();
+    //отрендерить все карточки из даты в контейнер
+    const cardList = new Section(generateCard, classConfig.cardContainer);
+    cardList.renderItems(cards);
   })
   .catch((err) => console.log(err));
