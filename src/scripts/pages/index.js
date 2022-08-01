@@ -3,6 +3,7 @@ import Api from "../components/Api.js";
 import Section from "../components/Section.js";
 import Card from "../components/Card.js";
 import UserInfo from "../components/UserInfo.js";
+
 import { generateCardElement } from "../cards.js";
 import { openPopup, closePopup, handlePopupCloseClick } from "../popup.js";
 import { enableValidation } from "../validate.js";
@@ -126,8 +127,14 @@ document.addEventListener(`click`, (evt) => {
 enableValidation(classConfig);
 
 //Image Scale (дописать)
-const imagePopup = new PopupWithImage()
-
+function handleImageClick(image, link) {
+  const imagePopup = new PopupWithImage(
+    classConfig.popupWithImage,
+    image,
+    link
+  );
+  imagePopup.open();
+}
 
 //сгенерировать одну карточку
 function generateCard(data) {
@@ -150,4 +157,3 @@ Promise.all([api.getProfile(), api.getCards()])
     cardList.renderItems(cards);
   })
   .catch((err) => console.log(err));
-

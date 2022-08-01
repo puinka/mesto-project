@@ -12,6 +12,7 @@ export const classConfig = {
   likesCounter: `.element__likes-amount`,
   cardTitle: `.element__title`,
   cardContainer: `.elements`,
+  popupWithImage: `.popup_type_view-photo`,
 };
 
 export const apiConfig = {
@@ -52,9 +53,9 @@ export const inputPlaceName = formAddPlace.elements.placeName;
 export const inputPlaceLink = formAddPlace.elements.placeLink;
 
 //Popup Image Scale View
-export const popupWithImage = document.querySelector('.popup_type_view-photo');
-export const popupImage = popupWithImage.querySelector('.popup__image');
-export const popupText = popupWithImage.querySelector('.popup__caption');
+export const popupWithImage = document.querySelector(".popup_type_view-photo");
+export const popupImage = popupWithImage.querySelector(`.popup__image`);
+export const popupText = popupWithImage.querySelector(".popup__caption");
 
 //Edit avatar popup elements
 export const popupEditAvatar = document.querySelector(
