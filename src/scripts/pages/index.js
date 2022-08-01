@@ -19,6 +19,7 @@ import {
   profileUserOccupation,
   profileAvatar,
 } from "../utils/constants.js";
+import PopupWithImage from "../components/PopupWithImage";
 
 //User ID
 let myId;
@@ -124,6 +125,10 @@ document.addEventListener(`click`, (evt) => {
 //validation
 enableValidation(classConfig);
 
+//Image Scale (дописать)
+const imagePopup = new PopupWithImage()
+
+
 //сгенерировать одну карточку
 function generateCard(data) {
   const card = new Card(data, myId);
@@ -145,3 +150,4 @@ Promise.all([api.getProfile(), api.getCards()])
     cardList.renderItems(cards);
   })
   .catch((err) => console.log(err));
+

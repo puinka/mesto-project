@@ -51,6 +51,11 @@ export const formAddPlace = document.forms.addPlace;
 export const inputPlaceName = formAddPlace.elements.placeName;
 export const inputPlaceLink = formAddPlace.elements.placeLink;
 
+//Popup Image Scale View
+export const popupWithImage = document.querySelector('.popup_type_view-photo');
+export const popupImage = popupWithImage.querySelector('.popup__image');
+export const popupText = popupWithImage.querySelector('.popup__caption');
+
 //Edit avatar popup elements
 export const popupEditAvatar = document.querySelector(
   `.popup_type_edit-avatar`
