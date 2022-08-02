@@ -117,11 +117,11 @@ formAddPlace.addEventListener(`submit`, (evt) =>
   handleAddFormSubmit(evt, myId)
 );
 
-document.addEventListener(`click`, (evt) => {
-  if (evt.target.classList.contains(`popup__close-button`)) {
-    handlePopupCloseClick(evt.target);
-  }
-});
+// document.addEventListener(`click`, (evt) => {
+//   if (evt.target.classList.contains(`popup__close-button`)) {
+//     handlePopupCloseClick(evt.target);
+//   }
+// });
 
 //validation
 enableValidation(classConfig);
@@ -134,11 +134,12 @@ function handleImageClick(image, link) {
     link
   );
   imagePopup.open();
+  imagePopup.setEventListeners();
 }
 
 //сгенерировать одну карточку
 function generateCard(data) {
-  const card = new Card(data, myId);
+  const card = new Card(data, myId, handleImageClick);
   return card.generate();
 }
 
