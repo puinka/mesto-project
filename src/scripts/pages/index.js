@@ -21,6 +21,7 @@ import {
   profileAvatar,
 } from "../utils/constants.js";
 import PopupWithImage from "../components/PopupWithImage";
+import { giveLike } from "../api";
 
 //User ID
 let myId;
@@ -126,7 +127,6 @@ formAddPlace.addEventListener(`submit`, (evt) =>
 //validation
 enableValidation(classConfig);
 
-//Image Scale (дописать)
 function handleImageClick(image, link) {
   const imagePopup = new PopupWithImage(
     classConfig.popupWithImage,
@@ -137,15 +137,30 @@ function handleImageClick(image, link) {
   imagePopup.setEventListeners();
 }
 
+function handleLikeClick(card) {
+  card.isLiked()
+    ? api
+        .takeLike(card._id)
+        .then((data) => {
+          card.updateLikes(true, data);
+        })
+        .catch((err) => console.log(err))
+    : giveLike(card._id).then((data) => {
+        card.updateLikes(false, data);
+      });
+}
+
 //сгенерировать одну карточку
 function generateCard(data) {
-  const card = new Card(data, myId, handleImageClick);
+  const card = new Card(data, myId, handleImageClick, handleLikeClick);
   return card.generate();
 }
 
 //render page
 const api = new Api(apiConfig);
 const userInfo = new UserInfo();
+const cardList = new Section(generateCard, classConfig.cardContainer);
+
 Promise.all([api.getProfile(), api.getCards()])
   .then(([profile, cards]) => {
     myId = profile._id;
@@ -154,7 +169,6 @@ Promise.all([api.getProfile(), api.getCards()])
     userInfo.renderAvatar();
 
     //отрендерить все карточки из даты в контейнер
-    const cardList = new Section(generateCard, classConfig.cardContainer);
     cardList.renderItems(cards);
   })
   .catch((err) => console.log(err));
