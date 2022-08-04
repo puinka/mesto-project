@@ -4,6 +4,9 @@ import Section from "../components/Section.js";
 import Card from "../components/Card.js";
 import UserInfo from "../components/UserInfo.js";
 
+//в FormValidator передавать classConfig и форму, которую требуется валидировать
+import FormValidator from "../components/FormValidator.js";
+
 import { generateCardElement } from "../cards.js";
 import { openPopup, closePopup, handlePopupCloseClick } from "../popup.js";
 import { enableValidation } from "../validate.js";
