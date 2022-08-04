@@ -145,9 +145,11 @@ function handleLikeClick(card) {
           card.updateLikes(true, data);
         })
         .catch((err) => console.log(err))
-    : giveLike(card._id).then((data) => {
-        card.updateLikes(false, data);
-      });
+    : giveLike(card._id)
+        .then((data) => {
+          card.updateLikes(false, data);
+        })
+        .catch((err) => console.log(err));
 }
 
 //сгенерировать одну карточку

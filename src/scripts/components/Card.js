@@ -38,24 +38,6 @@ export default class Card {
     this._likesCounter.textContent = `${data.likes.length}`;
   }
 
-  // _handleLikeClick(cardId, likeButton, likesCounter) {
-  //     if (!likeButton.classList.contains(classConfig.likeActiveClass)) {
-  //       giveLike(cardId)
-  //         .then((data) => {
-  //           likeButton.classList.add(classConfig.likeActiveClass);
-  //           likesCounter.textContent = `${data.likes.length}`;
-  //         })
-  //         .catch((err) => console.log(err));
-  //     } else {
-  //       takeLike(cardId)
-  //         .then((data) => {
-  //           likeButton.classList.remove(classConfig.likeActiveClass);
-  //           likesCounter.textContent = `${data.likes.length}`;
-  //         })
-  //         .catch((err) => console.log(err));
-  //     }
-  //   }
-
   _setEventListeners() {
     this._cardPhoto.addEventListener(`click`, () =>
       this._handleImageClick(this._name, this._link)
