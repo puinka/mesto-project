@@ -3,15 +3,17 @@ import Api from "../components/Api.js";
 import Section from "../components/Section.js";
 import Card from "../components/Card.js";
 import UserInfo from "../components/UserInfo.js";
-
-//в FormValidator передавать classConfig и форму, которую требуется валидировать
 import FormValidator from "../components/FormValidator.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
 
-import { generateCardElement } from "../cards.js";
-import { openPopup, closePopup, handlePopupCloseClick } from "../popup.js";
-import { enableValidation } from "../validate.js";
-import { apiConfig } from "../utils/constants";
+///////
+
+//import { generateCardElement } from "../cards.js";
+//import { openPopup, closePopup, handlePopupCloseClick } from "../popup.js";
+//import { enableValidation } from "../validate.js";
 import {
+  apiConfig,
   buttonEditProfile,
   buttonAddPlace,
   buttonEditAvatar,
@@ -21,19 +23,30 @@ import {
   classConfig,
   profileUserName,
   profileUserOccupation,
-  profileAvatar,
+  popupSelector,
 } from "../utils/constants.js";
-import PopupWithImage from "../components/PopupWithImage";
-import { giveLike } from "../api";
+
+// import { giveLike } from "../api";
 
 //User ID
 let myId;
 
+const api = new Api(apiConfig);
+const userInfo = new UserInfo();
+const cardList = new Section(generateCard, classConfig.cardContainer);
+
+//edit avatar popup
+const popupEditAvatar = new PopupWithForm(
+  popupSelector.editAvatar,
+  handleEditAvatarSubmit
+);
+popupEditAvatar.setEventListeners();
+
 //functions
-function fillEditProfileInputs() {
-  inputUserName.value = profileUserName.textContent;
-  inputUserOccupation.value = profileUserOccupation.textContent;
-}
+// function fillEditProfileInputs() {
+//   inputUserName.value = profileUserName.textContent;
+//   inputUserOccupation.value = profileUserOccupation.textContent;
+// }
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
@@ -51,23 +64,23 @@ function handleProfileFormSubmit(evt) {
     });
 }
 
-function handleAvatarFormSubmit(evt) {
-  evt.preventDefault();
-  const buttonElement = evt.target.elements.submit;
-  buttonElement.textContent = `Сохранение...`;
-  patchAvatar(inputAvatarLink.value)
-    .then((user) => {
-      profileAvatar.src = user.avatar;
-      closePopup(popupEditAvatar);
-    })
-    .catch((err) => console.log(err))
-    .finally(() => {
-      buttonElement.textContent = `Сохранить`;
-      buttonElement.classList.add(classConfig.buttonDisabledClass);
-      buttonElement.disabled = true;
-      evt.target.reset();
-    });
-}
+// function handleAvatarFormSubmit(evt) {
+//   evt.preventDefault();
+//   const buttonElement = evt.target.elements.submit;
+//   buttonElement.textContent = `Сохранение...`;
+//   patchAvatar(inputAvatarLink.value)
+//     .then((user) => {
+//       profileAvatar.src = user.avatar;
+//       closePopup(popupEditAvatar);
+//     })
+//     .catch((err) => console.log(err))
+//     .finally(() => {
+//       buttonElement.textContent = `Сохранить`;
+//       buttonElement.classList.add(classConfig.buttonDisabledClass);
+//       buttonElement.disabled = true;
+//       evt.target.reset();
+//     });
+// }
 
 function handleAddFormSubmit(evt, myId) {
   evt.preventDefault();
@@ -106,30 +119,26 @@ buttonAddPlace.addEventListener(`click`, function () {
 });
 
 buttonEditAvatar.addEventListener(`click`, function () {
-  openPopup(popupEditAvatar);
+  popupEditAvatar.open();
 });
 
 formEditProfile.addEventListener(`submit`, (evt) =>
   handleProfileFormSubmit(evt, inputUserName, inputUserOccupation)
 );
 
-formEditAvatar.addEventListener(`submit`, (evt) =>
-  handleAvatarFormSubmit(evt, inputAvatarLink)
-);
+// formEditAvatar.addEventListener(`submit`, (evt) =>
+//   handleAvatarFormSubmit(evt, inputAvatarLink)
+// );
 
 formAddPlace.addEventListener(`submit`, (evt) =>
   handleAddFormSubmit(evt, myId)
 );
 
 //validation
-enableValidation(classConfig);
+//enableValidation(classConfig);
 
 function handleImageClick(image, link) {
-  const imagePopup = new PopupWithImage(
-    classConfig.popupWithImage,
-    image,
-    link
-  );
+  const imagePopup = new PopupWithImage(popupSelector.viewPhoto, image, link);
   imagePopup.open();
   imagePopup.setEventListeners();
 }
@@ -155,17 +164,20 @@ function generateCard(data) {
   return card.generate();
 }
 
-//render page
-const api = new Api(apiConfig);
-const userInfo = new UserInfo();
-const cardList = new Section(generateCard, classConfig.cardContainer);
+//popup handler functions
+function handleEditAvatarSubmit({ avatarLink }) {
+  api.updateAvatar(avatarLink).then((data) => {
+    userInfo.renderAvatar(data);
+    popupEditAvatar.close();
+  });
+}
 
 Promise.all([api.getProfile(), api.getCards()])
   .then(([profile, cards]) => {
     myId = profile._id;
     userInfo.getUserInfo(profile);
     userInfo.renderProfileInfo();
-    userInfo.renderAvatar();
+    userInfo.renderAvatar(profile);
 
     //отрендерить все карточки из даты в контейнер
     cardList.renderItems(cards);

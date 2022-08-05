@@ -23,7 +23,7 @@ export default class UserInfo {
     this._userAboutElement.textContent = this._about;
   }
 
-  renderAvatar() {
-    this._userAvatarElement.src = this._avatar;
+  renderAvatar(data) {
+    this._userAvatarElement.src = data.avatar;
   }
 }

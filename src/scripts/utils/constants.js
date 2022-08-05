@@ -12,7 +12,6 @@ export const classConfig = {
   likesCounter: `.element__likes-amount`,
   cardTitle: `.element__title`,
   cardContainer: `.elements`,
-  popupWithImage: `.popup_type_view-photo`,
 };
 
 export const apiConfig = {
@@ -21,6 +20,13 @@ export const apiConfig = {
     authorization: "990d24ba-7f92-4fb3-a188-40b44340a14f",
     "Content-Type": "application/json",
   },
+};
+
+export const popupSelector = {
+  editProfile: `.popup_type_edit-profile`,
+  addPlace: `.popup_type_add-place`,
+  viewPhoto: `.popup_type_view-photo`,
+  editAvatar: `.popup_type_edit-avatar`,
 };
 
 export const cardTemplate = document.querySelector(`#card-template`).content;
@@ -57,9 +63,6 @@ export const popupWithImage = document.querySelector(".popup_type_view-photo");
 export const popupImage = popupWithImage.querySelector(`.popup__image`);
 export const popupText = popupWithImage.querySelector(".popup__caption");
 
-//Edit avatar popup elements
-export const popupEditAvatar = document.querySelector(
-  `.popup_type_edit-avatar`
-);
+//Edit avatar
 export const formEditAvatar = document.forms.editAvatar;
-export const inputAvatarLink = formEditAvatar.elements.avatarLink;
+//export const inputAvatarLink = formEditAvatar.elements.avatarLink;
