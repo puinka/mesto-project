@@ -24,13 +24,12 @@ export default class Popup {
     }
   }
 
-  _handlePopupOverlayClick() {
-    if (this._popup.classList.contains(`popup_open`)) {
+  _handlePopupOverlayClick(evt) {
+    if (evt.target.classList.contains(`popup`)) {
       this.close();
     }
   }
 
-  //публичный метод setEventListeners, который добавляет слушатель клика иконке закрытия попапа
   setEventListeners() {
     this._closeButton.addEventListener(`click`, () => {
       this.close();
