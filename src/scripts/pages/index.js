@@ -121,12 +121,6 @@ formAddPlace.addEventListener(`submit`, (evt) =>
   handleAddFormSubmit(evt, myId)
 );
 
-// document.addEventListener(`click`, (evt) => {
-//   if (evt.target.classList.contains(`popup__close-button`)) {
-//     handlePopupCloseClick(evt.target);
-//   }
-// });
-
 //validation
 enableValidation(classConfig);
 
