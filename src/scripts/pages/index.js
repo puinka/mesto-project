@@ -17,8 +17,8 @@ import {
   buttonEditProfile,
   buttonAddPlace,
   buttonEditAvatar,
-  formEditProfile,
   formEditAvatar,
+  formEditProfile,
   formAddPlace,
   classConfig,
   profileUserName,
@@ -41,6 +41,8 @@ const popupEditAvatar = new PopupWithForm(
   handleEditAvatarSubmit
 );
 popupEditAvatar.setEventListeners();
+const editAvatarValidator = new FormValidator(classConfig, formEditAvatar);
+editAvatarValidator.enableValidation();
 
 //functions
 // function fillEditProfileInputs() {
@@ -125,10 +127,6 @@ buttonEditAvatar.addEventListener(`click`, function () {
 formEditProfile.addEventListener(`submit`, (evt) =>
   handleProfileFormSubmit(evt, inputUserName, inputUserOccupation)
 );
-
-// formEditAvatar.addEventListener(`submit`, (evt) =>
-//   handleAvatarFormSubmit(evt, inputAvatarLink)
-// );
 
 formAddPlace.addEventListener(`submit`, (evt) =>
   handleAddFormSubmit(evt, myId)
