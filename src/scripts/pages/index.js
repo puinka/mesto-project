@@ -151,7 +151,8 @@ function handleLikeClick(card) {
           card.updateLikes(true, data);
         })
         .catch((err) => console.log(err))
-    : giveLike(card._id)
+    : api
+        .giveLike(card._id)
         .then((data) => {
           card.updateLikes(false, data);
         })

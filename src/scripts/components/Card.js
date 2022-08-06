@@ -30,12 +30,13 @@ export default class Card {
   }
 
   updateLikes(isLiked, data) {
+    this._likes = data.likes;
+    this._likesCounter.textContent = `${data.likes.length}`;
     if (isLiked) {
       this._likeButton.classList.remove(classConfig.likeActiveClass);
     } else {
       this._likeButton.classList.add(classConfig.likeActiveClass);
     }
-    this._likesCounter.textContent = `${data.likes.length}`;
   }
 
   _setEventListeners() {
