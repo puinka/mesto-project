@@ -19,11 +19,12 @@ import {
   buttonEditAvatar,
   formEditAvatar,
   formEditProfile,
+  inputUserName,
+  inputUserOccupation,
   formAddPlace,
   classConfig,
-  profileUserName,
-  profileUserOccupation,
   popupSelector,
+  profileSelector,
 } from "../utils/constants.js";
 
 // import { giveLike } from "../api";
@@ -32,7 +33,7 @@ import {
 let myId;
 
 const api = new Api(apiConfig);
-const userInfo = new UserInfo();
+const userInfo = new UserInfo(profileSelector);
 const cardList = new Section(generateCard, classConfig.cardContainer);
 
 //edit avatar popup
@@ -44,27 +45,30 @@ popupEditAvatar.setEventListeners();
 const editAvatarValidator = new FormValidator(classConfig, formEditAvatar);
 editAvatarValidator.enableValidation();
 
-//functions
-// function fillEditProfileInputs() {
-//   inputUserName.value = profileUserName.textContent;
-//   inputUserOccupation.value = profileUserOccupation.textContent;
-// }
+//edit profile popup
+const popupEditProfile = new PopupWithForm(
+  popupSelector.editProfile,
+  handleEditProfileSubmit
+);
+popupEditProfile.setEventListeners();
+const editProfileValidator = new FormValidator(classConfig, formEditProfile);
+editProfileValidator.enableValidation();
 
-function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
-  const buttonElement = evt.target.elements.submit;
-  buttonElement.textContent = `Сохранение...`;
-  patchProfile(inputUserName.value, inputUserOccupation.value)
-    .then((user) => {
-      profileUserName.textContent = user.name;
-      profileUserOccupation.textContent = user.about;
-      closePopup(popupEditProfile);
-    })
-    .catch((err) => console.log(err))
-    .finally(() => {
-      buttonElement.textContent = `Сохранить`;
-    });
-}
+// function handleProfileFormSubmit(evt) {
+//   evt.preventDefault();
+//   const buttonElement = evt.target.elements.submit;
+//   buttonElement.textContent = `Сохранение...`;
+//   patchProfile(inputUserName.value, inputUserOccupation.value)
+//     .then((user) => {
+//       profileUserName.textContent = user.name;
+//       profileUserOccupation.textContent = user.about;
+//       closePopup(popupEditProfile);
+//     })
+//     .catch((err) => console.log(err))
+//     .finally(() => {
+//       buttonElement.textContent = `Сохранить`;
+//     });
+// }
 
 // function handleAvatarFormSubmit(evt) {
 //   evt.preventDefault();
@@ -112,8 +116,10 @@ function handleAddFormSubmit(evt, myId) {
 // event listeners
 
 buttonEditProfile.addEventListener(`click`, function () {
-  openPopup(popupEditProfile);
-  fillEditProfileInputs();
+  const userData = userInfo.getUserInfo();
+  popupEditProfile.open();
+  inputUserName.value = userData.name;
+  inputUserOccupation.value = userData.about;
 });
 
 buttonAddPlace.addEventListener(`click`, function () {
@@ -124,9 +130,9 @@ buttonEditAvatar.addEventListener(`click`, function () {
   popupEditAvatar.open();
 });
 
-formEditProfile.addEventListener(`submit`, (evt) =>
-  handleProfileFormSubmit(evt, inputUserName, inputUserOccupation)
-);
+// formEditProfile.addEventListener(`submit`, (evt) =>
+//   handleProfileFormSubmit(evt, inputUserName, inputUserOccupation)
+// );
 
 formAddPlace.addEventListener(`submit`, (evt) =>
   handleAddFormSubmit(evt, myId)
@@ -165,16 +171,30 @@ function generateCard(data) {
 
 //popup handler functions
 function handleEditAvatarSubmit({ avatarLink }) {
-  api.updateAvatar(avatarLink).then((data) => {
-    userInfo.renderAvatar(data);
-    popupEditAvatar.close();
-  });
+  api
+    .updateAvatar(avatarLink)
+    .then((data) => {
+      userInfo.renderAvatar(data);
+      popupEditAvatar.close();
+    })
+    .catch((err) => console.log(err));
+}
+
+function handleEditProfileSubmit({ userName, userOccupation }) {
+  api
+    .updateProfile(userName, userOccupation)
+    .then((data) => {
+      userInfo.setUserInfo(data);
+      userInfo.renderProfileInfo();
+      popupEditProfile.close();
+    })
+    .catch((err) => console.log(err));
 }
 
 Promise.all([api.getProfile(), api.getCards()])
   .then(([profile, cards]) => {
     myId = profile._id;
-    userInfo.getUserInfo(profile);
+    userInfo.setUserInfo(profile);
     userInfo.renderProfileInfo();
     userInfo.renderAvatar(profile);
 

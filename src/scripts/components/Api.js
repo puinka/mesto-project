@@ -33,13 +33,13 @@ export default class Api {
     }).then(this._handleServerResponse);
   }
 
-  updateProfile() {
+  updateProfile(name, about) {
     return fetch(`${this._url}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        name: profileUserName.value,
-        about: profileUserOccupation.value,
+        name: name,
+        about: about,
       }),
     }).then(this._handleServerResponse);
   }

@@ -1,18 +1,21 @@
-import {
-  profileUserName,
-  profileUserOccupation,
-  profileAvatar,
-} from "../utils/constants.js";
-
-// имя пользователя, занятие и аватар
 export default class UserInfo {
-  constructor() {
-    this._userNameElement = profileUserName;
-    this._userAboutElement = profileUserOccupation;
-    this._userAvatarElement = profileAvatar;
+  constructor(selector) {
+    this._userNameElement = document.querySelector(selector.profileUserName);
+    this._userAboutElement = document.querySelector(
+      selector.profileUserOccupation
+    );
+    this._userAvatarElement = document.querySelector(selector.profileAvatar);
   }
 
-  getUserInfo(data) {
+  getUserInfo() {
+    const userValues = {
+      name: this._userNameElement.textContent,
+      about: this._userAboutElement.textContent,
+    };
+    return userValues;
+  }
+
+  setUserInfo(data) {
     this._name = data.name;
     this._about = data.about;
     this._avatar = data.avatar;
