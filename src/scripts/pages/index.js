@@ -6,6 +6,7 @@ import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 
 ///////
 import {
@@ -57,6 +58,13 @@ popupAddNewCard.setEventListeners();
 const addNewCardValidator = new FormValidator(classConfig, formAddPlace);
 addNewCardValidator.enableValidation();
 
+//confirm delete a card popup
+const popupConfirmDeleteCard = new PopupWithConfirmation(
+  popupSelector.deleteCard,
+  handleDeleteCardConfirmation
+);
+popupConfirmDeleteCard.setEventListeners();
+
 //popup handler functions
 
 function handleEditAvatarSubmit({ avatarLink }) {
@@ -89,6 +97,13 @@ function handleAddNewCardSubmit({ placeName, placeLink }) {
       popupAddNewCard.close();
     })
     .catch((err) => console.log(err));
+}
+
+function handleDeleteCardConfirmation(cardId) {
+  api.deleteCard(cardId).then(() => {
+    popupConfirmDeleteCard.card.remove();
+    popupConfirmDeleteCard.close();
+  });
 }
 
 // function handleProfileFormSubmit(evt) {
@@ -153,7 +168,13 @@ function handleAddNewCardSubmit({ placeName, placeLink }) {
 //generate one card
 
 function generateCard(data) {
-  const card = new Card(data, myId, handleImageClick, handleLikeClick);
+  const card = new Card(
+    data,
+    myId,
+    handleImageClick,
+    handleLikeClick,
+    handleDeleteClick
+  );
   return card.generate();
 }
 
@@ -179,6 +200,11 @@ function handleLikeClick(card) {
           card.updateLikes(false, data);
         })
         .catch((err) => console.log(err));
+}
+
+function handleDeleteClick(card) {
+  popupConfirmDeleteCard.open();
+  popupConfirmDeleteCard.setCardData(card);
 }
 
 //render cards section

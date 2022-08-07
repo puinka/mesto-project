@@ -5,7 +5,8 @@ export default class Card {
     { name, link, owner, likes, _id },
     myId,
     handleImageClick,
-    handleLikeClick
+    handleLikeClick,
+    handleDeleteClick
   ) {
     this._name = name;
     this._link = link;
@@ -15,6 +16,7 @@ export default class Card {
     this._myId = myId;
     this._handleImageClick = handleImageClick;
     this._handleLikeClick = handleLikeClick;
+    this._handleDeleteClick = handleDeleteClick;
   }
 
   _getElement() {
@@ -48,10 +50,11 @@ export default class Card {
       this._handleLikeClick(this);
     });
 
-    // this._deleteButton.addEventListener(`click`, () => {
-    //   openPopup(confirmationPopup);
-    //   confirmationPopup.dataset.id = _id;
-    // });
+    this._deleteButton.addEventListener(`click`, () => {
+      //   openPopup(confirmationPopup);
+      //   confirmationPopup.dataset.id = _id;
+      this._handleDeleteClick(this);
+    });
   }
 
   generate() {
@@ -81,5 +84,9 @@ export default class Card {
 
     this._setEventListeners();
     return this._element;
+  }
+
+  remove() {
+    this._element.remove();
   }
 }

@@ -27,6 +27,7 @@ export const popupSelector = {
   addPlace: `.popup_type_add-place`,
   viewPhoto: `.popup_type_view-photo`,
   editAvatar: `.popup_type_edit-avatar`,
+  deleteCard: `.popup_type_confirm-removal`,
 };
 
 export const profileSelector = {
@@ -60,8 +61,8 @@ export const inputUserOccupation = formEditProfile.elements.userOccupation;
 //Add place popup elements
 //export const popupAddPlace = document.querySelector(`.popup_type_add-place`);
 export const formAddPlace = document.forms.addPlace;
-export const inputPlaceName = formAddPlace.elements.placeName;
-export const inputPlaceLink = formAddPlace.elements.placeLink;
+// export const inputPlaceName = formAddPlace.elements.placeName;
+// export const inputPlaceLink = formAddPlace.elements.placeLink;
 
 //Popup Image Scale View
 export const popupWithImage = document.querySelector(".popup_type_view-photo");
