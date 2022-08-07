@@ -8,10 +8,6 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 
 ///////
-
-//import { generateCardElement } from "../cards.js";
-//import { openPopup, closePopup, handlePopupCloseClick } from "../popup.js";
-//import { enableValidation } from "../validate.js";
 import {
   apiConfig,
   buttonEditProfile,
@@ -60,6 +56,40 @@ const popupAddNewCard = new PopupWithForm(
 popupAddNewCard.setEventListeners();
 const addNewCardValidator = new FormValidator(classConfig, formAddPlace);
 addNewCardValidator.enableValidation();
+
+//popup handler functions
+
+function handleEditAvatarSubmit({ avatarLink }) {
+  api
+    .updateAvatar(avatarLink)
+    .then((data) => {
+      userInfo.renderAvatar(data);
+      popupEditAvatar.close();
+    })
+    .catch((err) => console.log(err));
+}
+
+function handleEditProfileSubmit({ userName, userOccupation }) {
+  api
+    .updateProfile(userName, userOccupation)
+    .then((data) => {
+      userInfo.setUserInfo(data);
+      userInfo.renderProfileInfo();
+      popupEditProfile.close();
+    })
+    .catch((err) => console.log(err));
+}
+
+function handleAddNewCardSubmit({ placeName, placeLink }) {
+  api
+    .addNewCard(placeName, placeLink)
+    .then((data) => {
+      const newCard = generateCard(data);
+      cardList.addItem(newCard);
+      popupAddNewCard.close();
+    })
+    .catch((err) => console.log(err));
+}
 
 // function handleProfileFormSubmit(evt) {
 //   evt.preventDefault();
@@ -120,26 +150,14 @@ addNewCardValidator.enableValidation();
 //     });
 // }
 
-// event listeners
+//generate one card
 
-buttonEditProfile.addEventListener(`click`, function () {
-  const userData = userInfo.getUserInfo();
-  popupEditProfile.open();
-  inputUserName.value = userData.name;
-  inputUserOccupation.value = userData.about;
-});
+function generateCard(data) {
+  const card = new Card(data, myId, handleImageClick, handleLikeClick);
+  return card.generate();
+}
 
-buttonAddPlace.addEventListener(`click`, function () {
-  popupAddNewCard.open();
-});
-
-buttonEditAvatar.addEventListener(`click`, function () {
-  popupEditAvatar.open();
-});
-
-// formAddPlace.addEventListener(`submit`, (evt) =>
-//   handleAddFormSubmit(evt, myId)
-// );
+//card handler functions
 
 function handleImageClick(image, link) {
   const imagePopup = new PopupWithImage(popupSelector.viewPhoto, image, link);
@@ -163,44 +181,7 @@ function handleLikeClick(card) {
         .catch((err) => console.log(err));
 }
 
-//сгенерировать одну карточку
-function generateCard(data) {
-  const card = new Card(data, myId, handleImageClick, handleLikeClick);
-  return card.generate();
-}
-
-//popup handler functions
-function handleEditAvatarSubmit({ avatarLink }) {
-  api
-    .updateAvatar(avatarLink)
-    .then((data) => {
-      userInfo.renderAvatar(data);
-      popupEditAvatar.close();
-    })
-    .catch((err) => console.log(err));
-}
-
-function handleEditProfileSubmit({ userName, userOccupation }) {
-  api
-    .updateProfile(userName, userOccupation)
-    .then((data) => {
-      userInfo.setUserInfo(data);
-      userInfo.renderProfileInfo();
-      popupEditProfile.close();
-    })
-    .catch((err) => console.log(err));
-}
-
-function handleAddNewCardSubmit({ placeName, placeLink }) {
-  api
-    .addNewCard(placeName, placeLink)
-    .then((data) => {
-      const newCard = generateCard(data);
-      cardList.addItem(newCard);
-      popupAddNewCard.close();
-    })
-    .catch((err) => console.log(err));
-}
+//render cards section
 
 Promise.all([api.getProfile(), api.getCards()])
   .then(([profile, cards]) => {
@@ -213,3 +194,20 @@ Promise.all([api.getProfile(), api.getCards()])
     cardList.renderItems(cards);
   })
   .catch((err) => console.log(err));
+
+// event listeners
+
+buttonEditProfile.addEventListener(`click`, function () {
+  const userData = userInfo.getUserInfo();
+  popupEditProfile.open();
+  inputUserName.value = userData.name;
+  inputUserOccupation.value = userData.about;
+});
+
+buttonAddPlace.addEventListener(`click`, function () {
+  popupAddNewCard.open();
+});
+
+buttonEditAvatar.addEventListener(`click`, function () {
+  popupEditAvatar.open();
+});
