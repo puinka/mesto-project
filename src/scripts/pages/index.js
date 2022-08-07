@@ -113,65 +113,6 @@ function handleDeleteCardConfirmation(cardId) {
   });
 }
 
-// function handleProfileFormSubmit(evt) {
-//   evt.preventDefault();
-//   const buttonElement = evt.target.elements.submit;
-//   buttonElement.textContent = `Сохранение...`;
-//   patchProfile(inputUserName.value, inputUserOccupation.value)
-//     .then((user) => {
-//       profileUserName.textContent = user.name;
-//       profileUserOccupation.textContent = user.about;
-//       closePopup(popupEditProfile);
-//     })
-//     .catch((err) => console.log(err))
-//     .finally(() => {
-//       buttonElement.textContent = `Сохранить`;
-//     });
-// }
-
-// function handleAvatarFormSubmit(evt) {
-//   evt.preventDefault();
-//   const buttonElement = evt.target.elements.submit;
-//   buttonElement.textContent = `Сохранение...`;
-//   patchAvatar(inputAvatarLink.value)
-//     .then((user) => {
-//       profileAvatar.src = user.avatar;
-//       closePopup(popupEditAvatar);
-//     })
-//     .catch((err) => console.log(err))
-//     .finally(() => {
-//       buttonElement.textContent = `Сохранить`;
-//       buttonElement.classList.add(classConfig.buttonDisabledClass);
-//       buttonElement.disabled = true;
-//       evt.target.reset();
-//     });
-// }
-
-// function handleAddFormSubmit(evt, myId) {
-//   evt.preventDefault();
-//   const buttonElement = evt.target.elements.create;
-//   buttonElement.textContent = `Сохранение...`;
-//   const place = {
-//     name: inputPlaceName.value,
-//     link: inputPlaceLink.value,
-//   };
-//   postCard(place)
-//     .then((item) => {
-//       //TODO
-//       //тут использовать cardList.addItem();
-//       const card = generateCardElement(item, myId);
-//       elementsSection.prepend(card);
-//       closePopup(popupAddPlace);
-//     })
-//     .catch((err) => console.log(err))
-//     .finally(() => {
-//       buttonElement.textContent = `Создать`;
-//       buttonElement.classList.add(classConfig.buttonDisabledClass);
-//       buttonElement.disabled = true;
-//       evt.target.reset();
-//     });
-// }
-
 //generate one card
 
 function generateCard(data) {
