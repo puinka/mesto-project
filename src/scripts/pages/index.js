@@ -27,8 +27,6 @@ import {
   profileSelector,
 } from "../utils/constants.js";
 
-// import { giveLike } from "../api";
-
 //User ID
 let myId;
 
@@ -53,6 +51,15 @@ const popupEditProfile = new PopupWithForm(
 popupEditProfile.setEventListeners();
 const editProfileValidator = new FormValidator(classConfig, formEditProfile);
 editProfileValidator.enableValidation();
+
+//add new card popup
+const popupAddNewCard = new PopupWithForm(
+  popupSelector.addPlace,
+  handleAddNewCardSubmit
+);
+popupAddNewCard.setEventListeners();
+const addNewCardValidator = new FormValidator(classConfig, formAddPlace);
+addNewCardValidator.enableValidation();
 
 // function handleProfileFormSubmit(evt) {
 //   evt.preventDefault();
@@ -88,30 +95,30 @@ editProfileValidator.enableValidation();
 //     });
 // }
 
-function handleAddFormSubmit(evt, myId) {
-  evt.preventDefault();
-  const buttonElement = evt.target.elements.create;
-  buttonElement.textContent = `Сохранение...`;
-  const place = {
-    name: inputPlaceName.value,
-    link: inputPlaceLink.value,
-  };
-  postCard(place)
-    .then((item) => {
-      //TODO
-      //тут использовать cardList.addItem();
-      const card = generateCardElement(item, myId);
-      elementsSection.prepend(card);
-      closePopup(popupAddPlace);
-    })
-    .catch((err) => console.log(err))
-    .finally(() => {
-      buttonElement.textContent = `Создать`;
-      buttonElement.classList.add(classConfig.buttonDisabledClass);
-      buttonElement.disabled = true;
-      evt.target.reset();
-    });
-}
+// function handleAddFormSubmit(evt, myId) {
+//   evt.preventDefault();
+//   const buttonElement = evt.target.elements.create;
+//   buttonElement.textContent = `Сохранение...`;
+//   const place = {
+//     name: inputPlaceName.value,
+//     link: inputPlaceLink.value,
+//   };
+//   postCard(place)
+//     .then((item) => {
+//       //TODO
+//       //тут использовать cardList.addItem();
+//       const card = generateCardElement(item, myId);
+//       elementsSection.prepend(card);
+//       closePopup(popupAddPlace);
+//     })
+//     .catch((err) => console.log(err))
+//     .finally(() => {
+//       buttonElement.textContent = `Создать`;
+//       buttonElement.classList.add(classConfig.buttonDisabledClass);
+//       buttonElement.disabled = true;
+//       evt.target.reset();
+//     });
+// }
 
 // event listeners
 
@@ -123,23 +130,16 @@ buttonEditProfile.addEventListener(`click`, function () {
 });
 
 buttonAddPlace.addEventListener(`click`, function () {
-  openPopup(popupAddPlace);
+  popupAddNewCard.open();
 });
 
 buttonEditAvatar.addEventListener(`click`, function () {
   popupEditAvatar.open();
 });
 
-// formEditProfile.addEventListener(`submit`, (evt) =>
-//   handleProfileFormSubmit(evt, inputUserName, inputUserOccupation)
+// formAddPlace.addEventListener(`submit`, (evt) =>
+//   handleAddFormSubmit(evt, myId)
 // );
-
-formAddPlace.addEventListener(`submit`, (evt) =>
-  handleAddFormSubmit(evt, myId)
-);
-
-//validation
-//enableValidation(classConfig);
 
 function handleImageClick(image, link) {
   const imagePopup = new PopupWithImage(popupSelector.viewPhoto, image, link);
@@ -187,6 +187,17 @@ function handleEditProfileSubmit({ userName, userOccupation }) {
       userInfo.setUserInfo(data);
       userInfo.renderProfileInfo();
       popupEditProfile.close();
+    })
+    .catch((err) => console.log(err));
+}
+
+function handleAddNewCardSubmit({ placeName, placeLink }) {
+  api
+    .addNewCard(placeName, placeLink)
+    .then((data) => {
+      const newCard = generateCard(data);
+      cardList.addItem(newCard);
+      popupAddNewCard.close();
     })
     .catch((err) => console.log(err));
 }
