@@ -36,6 +36,11 @@ export const profileSelector = {
   profileAvatar: `.profile__avatar-image`,
 };
 
+export const defaultText = {
+  addCard: `Создать`,
+  save: `Сохранить`,
+};
+
 export const cardTemplate = document.querySelector(`#card-template`).content;
 //export const elementsSection = document.querySelector(`.elements`);
 

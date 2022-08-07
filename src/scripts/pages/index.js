@@ -22,6 +22,7 @@ import {
   classConfig,
   popupSelector,
   profileSelector,
+  defaultText,
 } from "../utils/constants.js";
 
 //User ID
@@ -68,16 +69,19 @@ popupConfirmDeleteCard.setEventListeners();
 //popup handler functions
 
 function handleEditAvatarSubmit({ avatarLink }) {
+  popupEditAvatar.showLoadingText(true);
   api
     .updateAvatar(avatarLink)
     .then((data) => {
       userInfo.renderAvatar(data);
       popupEditAvatar.close();
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err))
+    .finally(() => popupEditAvatar.showLoadingText(false));
 }
 
 function handleEditProfileSubmit({ userName, userOccupation }) {
+  popupEditProfile.showLoadingText(true);
   api
     .updateProfile(userName, userOccupation)
     .then((data) => {
@@ -85,10 +89,12 @@ function handleEditProfileSubmit({ userName, userOccupation }) {
       userInfo.renderProfileInfo();
       popupEditProfile.close();
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err))
+    .finally(() => popupEditProfile.showLoadingText(false));
 }
 
 function handleAddNewCardSubmit({ placeName, placeLink }) {
+  popupAddNewCard.showLoadingText(true);
   api
     .addNewCard(placeName, placeLink)
     .then((data) => {
@@ -96,7 +102,8 @@ function handleAddNewCardSubmit({ placeName, placeLink }) {
       cardList.addItem(newCard);
       popupAddNewCard.close();
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err))
+    .finally(() => popupAddNewCard.showLoadingText(false, defaultText.addCard));
 }
 
 function handleDeleteCardConfirmation(cardId) {
@@ -216,7 +223,6 @@ Promise.all([api.getProfile(), api.getCards()])
     userInfo.renderProfileInfo();
     userInfo.renderAvatar(profile);
 
-    //отрендерить все карточки из даты в контейнер
     cardList.renderItems(cards);
   })
   .catch((err) => console.log(err));
@@ -224,10 +230,10 @@ Promise.all([api.getProfile(), api.getCards()])
 // event listeners
 
 buttonEditProfile.addEventListener(`click`, function () {
-  const userData = userInfo.getUserInfo();
+  const { name, about } = userInfo.getUserInfo();
   popupEditProfile.open();
-  inputUserName.value = userData.name;
-  inputUserOccupation.value = userData.about;
+  inputUserName.value = name;
+  inputUserOccupation.value = about;
 });
 
 buttonAddPlace.addEventListener(`click`, function () {

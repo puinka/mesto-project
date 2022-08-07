@@ -9,6 +9,9 @@ export default class PopupWithForm extends Popup {
     this._inputList = Array.from(
       this._form.querySelectorAll(classConfig.textInputClass)
     );
+    this._submitButton = this._form.querySelector(
+      classConfig.submitButtonClass
+    );
   }
 
   _getInputValues() {
@@ -31,5 +34,11 @@ export default class PopupWithForm extends Popup {
       const formValues = this._getInputValues();
       this._handleFormSubmit(formValues);
     });
+  }
+
+  showLoadingText(isLoading, defaultText = `Сохранить`) {
+    isLoading
+      ? (this._submitButton.textContent = `Сохранение...`)
+      : (this._submitButton.textContent = defaultText);
   }
 }
