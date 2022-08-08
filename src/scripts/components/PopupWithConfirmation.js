@@ -1,13 +1,13 @@
 import Popup from "./Popup.js";
-import { classConfig } from "../utils/constants.js";
 
 export default class PopupWithConfirmation extends Popup {
-  constructor(selector, handleConfirmation) {
-    super(selector);
+  constructor(popupSelector, handleConfirmation, classSelector) {
+    super(popupSelector);
     this._handleConfirmation = handleConfirmation;
-    this._form = this._popup.querySelector(classConfig.formClass);
+    this._classSelector = classSelector;
+    this._form = this._popup.querySelector(this._classSelector.formClass);
     this._confirmButton = this._form.querySelector(
-      classConfig.submitButtonClass
+      this._classSelector.submitButtonClass
     );
   }
 

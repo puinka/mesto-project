@@ -1,11 +1,3 @@
-import {
-  profileUserName,
-  profileUserOccupation,
-  inputAvatarLink,
-  inputPlaceName,
-  inputPlaceLink,
-} from "../utils/constants.js";
-
 export default class Api {
   constructor({ serverURL, headers }) {
     this._url = serverURL;

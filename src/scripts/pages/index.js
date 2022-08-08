@@ -8,7 +8,6 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 
-///////
 import {
   apiConfig,
   buttonEditProfile,
@@ -23,6 +22,9 @@ import {
   popupSelector,
   profileSelector,
   defaultText,
+  cardTemplate,
+  popupImage,
+  popupText,
 } from "../utils/constants.js";
 
 //User ID
@@ -35,7 +37,8 @@ const cardList = new Section(generateCard, classConfig.cardContainer);
 //edit avatar popup
 const popupEditAvatar = new PopupWithForm(
   popupSelector.editAvatar,
-  handleEditAvatarSubmit
+  handleEditAvatarSubmit,
+  classConfig
 );
 popupEditAvatar.setEventListeners();
 const editAvatarValidator = new FormValidator(classConfig, formEditAvatar);
@@ -44,7 +47,8 @@ editAvatarValidator.enableValidation();
 //edit profile popup
 const popupEditProfile = new PopupWithForm(
   popupSelector.editProfile,
-  handleEditProfileSubmit
+  handleEditProfileSubmit,
+  classConfig
 );
 popupEditProfile.setEventListeners();
 const editProfileValidator = new FormValidator(classConfig, formEditProfile);
@@ -53,7 +57,8 @@ editProfileValidator.enableValidation();
 //add new card popup
 const popupAddNewCard = new PopupWithForm(
   popupSelector.addPlace,
-  handleAddNewCardSubmit
+  handleAddNewCardSubmit,
+  classConfig
 );
 popupAddNewCard.setEventListeners();
 const addNewCardValidator = new FormValidator(classConfig, formAddPlace);
@@ -62,7 +67,8 @@ addNewCardValidator.enableValidation();
 //confirm delete a card popup
 const popupConfirmDeleteCard = new PopupWithConfirmation(
   popupSelector.deleteCard,
-  handleDeleteCardConfirmation
+  handleDeleteCardConfirmation,
+  classConfig
 );
 popupConfirmDeleteCard.setEventListeners();
 
@@ -121,7 +127,9 @@ function generateCard(data) {
     myId,
     handleImageClick,
     handleLikeClick,
-    handleDeleteClick
+    handleDeleteClick,
+    cardTemplate,
+    classConfig
   );
   return card.generate();
 }
@@ -129,7 +137,13 @@ function generateCard(data) {
 //card handler functions
 
 function handleImageClick(image, link) {
-  const imagePopup = new PopupWithImage(popupSelector.viewPhoto, image, link);
+  const imagePopup = new PopupWithImage(
+    popupSelector.viewPhoto,
+    image,
+    link,
+    popupImage,
+    popupText
+  );
   imagePopup.open();
   imagePopup.setEventListeners();
 }

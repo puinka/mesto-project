@@ -1,12 +1,12 @@
-import { cardTemplate, classConfig } from "../utils/constants.js";
-
 export default class Card {
   constructor(
     { name, link, owner, likes, _id },
     myId,
     handleImageClick,
     handleLikeClick,
-    handleDeleteClick
+    handleDeleteClick,
+    cardTemplate,
+    selector
   ) {
     this._name = name;
     this._link = link;
@@ -17,11 +17,13 @@ export default class Card {
     this._handleImageClick = handleImageClick;
     this._handleLikeClick = handleLikeClick;
     this._handleDeleteClick = handleDeleteClick;
+    this._template = cardTemplate;
+    this._selector = selector;
   }
 
   _getElement() {
-    const cardElement = cardTemplate
-      .querySelector(classConfig.cardClass)
+    const cardElement = this._template
+      .querySelector(this._selector.cardClass)
       .cloneNode(true);
 
     return cardElement;
@@ -35,9 +37,9 @@ export default class Card {
     this._likes = data.likes;
     this._likesCounter.textContent = `${data.likes.length}`;
     if (isLiked) {
-      this._likeButton.classList.remove(classConfig.likeActiveClass);
+      this._likeButton.classList.remove(this._selector.likeActiveClass);
     } else {
-      this._likeButton.classList.add(classConfig.likeActiveClass);
+      this._likeButton.classList.add(this._selector.likeActiveClass);
     }
   }
 
@@ -51,8 +53,6 @@ export default class Card {
     });
 
     this._deleteButton.addEventListener(`click`, () => {
-      //   openPopup(confirmationPopup);
-      //   confirmationPopup.dataset.id = _id;
       this._handleDeleteClick(this);
     });
   }
@@ -60,13 +60,17 @@ export default class Card {
   generate() {
     this._element = this._getElement();
 
-    this._title = this._element.querySelector(classConfig.cardTitle);
+    this._title = this._element.querySelector(this._selector.cardTitle);
     this._deleteButton = this._element.querySelector(
-      classConfig.deleteButtonClass
+      this._selector.deleteButtonClass
     );
-    this._likeButton = this._element.querySelector(classConfig.likeButtonClass);
-    this._likesCounter = this._element.querySelector(classConfig.likesCounter);
-    this._cardPhoto = this._element.querySelector(classConfig.cardPhoto);
+    this._likeButton = this._element.querySelector(
+      this._selector.likeButtonClass
+    );
+    this._likesCounter = this._element.querySelector(
+      this._selector.likesCounter
+    );
+    this._cardPhoto = this._element.querySelector(this._selector.cardPhoto);
 
     this._likesCounter.textContent = this._likes.length;
     this._cardPhoto.src = this._link;
@@ -79,7 +83,7 @@ export default class Card {
     }
 
     if (this.isLiked()) {
-      this._likeButton.classList.add(classConfig.likeActiveClass);
+      this._likeButton.classList.add(this._selector.likeActiveClass);
     }
 
     this._setEventListeners();
@@ -88,5 +92,6 @@ export default class Card {
 
   remove() {
     this._element.remove();
+    this._element = null;
   }
 }
