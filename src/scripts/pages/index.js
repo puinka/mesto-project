@@ -40,6 +40,7 @@ const imagePopup = new PopupWithImage(
   popupImage,
   popupText
 );
+imagePopup.setEventListeners();
 
 //edit avatar popup
 const popupEditAvatar = new PopupWithForm(
@@ -145,7 +146,6 @@ function generateCard(data) {
 
 function handleImageClick(name, link) {
   imagePopup.open(name, link);
-  imagePopup.setEventListeners();
 }
 
 function handleLikeClick(card) {
