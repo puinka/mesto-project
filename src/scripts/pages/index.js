@@ -187,14 +187,17 @@ Promise.all([api.getProfile(), api.getCards()])
 buttonEditProfile.addEventListener(`click`, function () {
   const { name, about } = userInfo.getUserInfo();
   popupEditProfile.open();
+  editProfileValidator.disableButton();
   inputUserName.value = name;
   inputUserOccupation.value = about;
 });
 
 buttonAddPlace.addEventListener(`click`, function () {
+  addNewCardValidator.disableButton();
   popupAddNewCard.open();
 });
 
 buttonEditAvatar.addEventListener(`click`, function () {
+  editAvatarValidator.disableButton();
   popupEditAvatar.open();
 });
