@@ -34,6 +34,13 @@ const api = new Api(apiConfig);
 const userInfo = new UserInfo(profileSelector);
 const cardList = new Section(generateCard, classConfig.cardContainer);
 
+//popup with image
+const imagePopup = new PopupWithImage(
+  popupSelector.viewPhoto,
+  popupImage,
+  popupText
+);
+
 //edit avatar popup
 const popupEditAvatar = new PopupWithForm(
   popupSelector.editAvatar,
@@ -136,15 +143,8 @@ function generateCard(data) {
 
 //card handler functions
 
-function handleImageClick(image, link) {
-  const imagePopup = new PopupWithImage(
-    popupSelector.viewPhoto,
-    image,
-    link,
-    popupImage,
-    popupText
-  );
-  imagePopup.open();
+function handleImageClick(name, link) {
+  imagePopup.open(name, link);
   imagePopup.setEventListeners();
 }
 
